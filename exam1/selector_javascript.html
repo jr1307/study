@@ -50,7 +50,8 @@ window.onload = function(){
 	
 	var examObj6 = document.getElementsByClassName('exam_wrap')[5];
 	examObj6.getElementsByTagName('button')[0].onclick = function(){
-		var exam_q = examObj6.getElementsByClassName('exam_q')[0];
+		var examChild = examObj6.getElementsByClassName('exam_q')[0].querySelector('div ~ span');
+		examChild.style.backgroundColor = 'yellow';
 	};
 	
 	var examObj7 = document.getElementsByClassName('exam_wrap')[6];
@@ -63,7 +64,7 @@ window.onload = function(){
 	
 	var examObj8 = document.getElementsByClassName('exam_wrap')[7];
 	examObj8.getElementsByTagName('button')[0].onclick = function(){
-		var examChild = examObj8.getElementById('active');
+		var examChild = examObj8.getElementsByClassName('exam_q')[0].querySelector('#active');
 		examChild.style.backgroundColor = 'yellow';
 	}
 }

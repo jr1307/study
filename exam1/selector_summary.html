@@ -4,6 +4,9 @@
 <head>
 <meta charset="utf-8">
 <title>exam</title>
+<style>
+	.sum_txt{padding:5px 15px;background-color:#f5f5f5}
+</style>
 </head>
 <body>
 <!-- wrapper [s] -->
@@ -17,12 +20,40 @@
 	<!-- container [s] -->
 	<div id="container">
 		<h2>접근방법</h2>
+		<p>자바스크립트는 메서드를 이용해서 일일히 접근해야 하는 불편함이 있으며, IE하위버전에 지원하지 않는 기능들이 있어 크로스브라우징이 어렵다.</p>
+		<p>제이쿼리는 css작성방법과 동일하게 원하는 Element에 접근이 용이하며 크로스브라우징이 쉽다.</p>
 		<ul>
-			<li>javascript : getElementsById, getElementsByTagName, getElementsByClassName(IE9부터 지원) 등의 메서드를 이용해서 일일이 접근해야하는 불편함이 있다.</li>
-			<li><strong>javascript.querySelector('.example')</strong>를 이용해 css작성법과 동일하게 접근이 가능하다. (단, IE9부터 지원)</li>
-			<li>jQuery : #id, .class 등 css작성방법과 동일하게 원하는 Element에 접근이 용이하다.</li>
-			
+			<li>javascript selector : getElementsById(), getElementsByTagName(), getElementsByClassName()</li>
+			<li>jQuery selector : $('#id'), $('.class')</li>
 		</ul>
+		
+		<h2>javascript <strong>querySelector()</strong></h2>
+		<div class="sum_txt">
+			<p>- jquery처럼 괄호안에 css 선택자와 동일하게 넣어 작성할 수 있다. 예) document.querySelector('.class')</p>
+			<p>- 괄호안에 명시된 선택자가 여러개라도 그중 가장 앞에 있는 것만 선택된다.</p>
+			<p>- IE8부터 지원</p>
+		</div>
+		
+		<h2>javascript <strong>querySelectorAll()</strong></h2>
+		<div class="sum_txt">
+			<p>- jquery처럼 괄호안에 css 선택자와 동일하게 넣어 작성할 수 있다. 예) document.querySelectorAll('.class')</p>
+			<p>- 괄호안에 명시된 선택자가 모두 선택된다. 다수의 Element가 선택되므로 Index번호를 통해 접근이 가능하다.</p>
+			<p>- IE9부터 지원</p>
+		</div>
+		
+		<h2>javascript <strong>.firstChild / .firstElementChild</strong></h2>
+		<div class="sum_txt">
+			<p>- firstChild는 element와 text와 주석을 모두 인식하여 가장 앞에 있는것을 반환한다.</p>
+			<p>- firstElementChild는 첫번째 element를 반환한다.</p>
+			<p>- firstElementChild는 IE9부터 지원 </p>
+		</div>
+		
+		<h2>javascript <strong>.lastChild / .lastElementChild</strong></h2>
+		<div class="sum_txt">
+			<p>- lastChild element와 text와 주석을 모두 인식하여 가장 뒤에 있는것을 반환한다.</p>
+			<p>- lastElementChild 마지막 element를 반환한다.</p>
+			<p>- lastElementChild는 IE9부터 지원</p>
+		</div>
 	</div>
 	<!-- container [e] -->
 	<hr />

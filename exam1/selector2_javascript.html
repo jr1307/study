@@ -24,14 +24,12 @@ window.onload = function(){
 	var examObj3 = document.getElementsByClassName('exam_wrap')[2];
 	examObj3.getElementsByTagName('button')[0].onclick = function(){
 		var examChild = examObj3.getElementsByClassName('exam_q')[0];
-		//examChild.firstChild.nextSibling.nextSibling.style.backgroundColor = 'yellow'; // firstChild는 엔터키로 인한 공백, 주석을 모두 인식. nextSibling을 두번 해줘야 첫번째 div를 찾을수 있음
-		examChild.firstElementChild.style.backgroundColor = 'yellow'; // firstChild와 다르게 첫번째 element를 찾음. IE9부터 지원.
+		examChild.firstElementChild.style.backgroundColor = 'yellow';
 	}
 	
 	var examObj4 = document.getElementsByClassName('exam_wrap')[3];
 	examObj4.getElementsByTagName('button')[0].onclick = function(){
 		var examChild = examObj4.getElementsByClassName('exam_q')[0];
-		//examChild.lastChild.previousSibling.style.backgroundColor = 'yellow'; 
 		examChild.lastElementChild.style.backgroundColor = 'yellow';
 	}
 	
@@ -40,6 +38,38 @@ window.onload = function(){
 		var examChild = examObj5.getElementsByClassName('exam_q')[0];
 		var div = examChild.getElementsByTagName('div')[1];
 		div.style.backgroundColor = 'yellow';
+	}
+	
+	var examObj6 = document.getElementsByClassName('exam_wrap')[5];
+	examObj6.getElementsByTagName('button')[0].onclick = function(){
+		var examChild = examObj6.getElementsByClassName('exam_q')[0];
+		var div = examChild.getElementsByTagName('div')[2];
+		div.style.backgroundColor = 'yellow';
+	}
+	
+	var examObj7 = document.getElementsByClassName('exam_wrap')[6];
+	examObj7.getElementsByTagName('button')[0].onclick = function(){
+		var examChild = examObj7.getElementsByClassName('exam_q')[0];
+		var div = examChild.getElementsByTagName('div');
+		for(i=3; i<=div.length; i++){
+			div[i].style.backgroundColor = 'yellow';
+		}
+	}
+	
+	var examObj8 = document.getElementsByClassName('exam_wrap')[7];
+	examObj8.getElementsByTagName('button')[0].onclick = function(){
+		var examChild =examObj8.getElementsByClassName('exam_q')[0];
+		var div = examChild.getElementsByTagName('div');
+		for(i=0; i<=div.length; i++){
+			if(i<2){
+				div[i].style.backgroundColor = 'yellow';	
+			}else{
+				return false
+			}
+			
+			
+			
+		}
 	}
 }
 </script>
