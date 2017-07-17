@@ -1,12 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>Test</title>
+	<script src="js/libs/jquery-1.12.4.min.js"></script>
 </head>
 <body>
-<script>
 
-</script>	
+<script>
+	var num1  = window.prompt('첫 번째 숫자값을 입력해 주세요.');
+	var op = window.prompt('사칙연산자 중 하나를 입력해 주세요.');
+	var num2 = window.prompt('두 번째 숫자값을 입력해 주세요.');
+	var result;
+	
+	num1 = parseInt(num1);
+	num2 = parseInt(num2);
+	
+// 	switch(op){
+//		case "+" : 
+//			result = num1 + num2;
+//			break;
+//		case "-" :
+//			result = num1 - num2;
+//			break;
+//		case "*" :
+//			result = num1 * num2;
+//			break;
+//		case "/" :
+//			result = num1 / num2;
+//			break;
+//		default :
+//			result = "지원하지 않는 연산자 입니다."
+//			break;
+//	};
+	
+	if(op === "+"){
+		result = num1 + num2;
+	}else if(op === "-"){
+		result = num1 - num2;
+	}else if(op === "*"){
+		result = num1 * num2;
+	}else if(op === "/"){
+		result = num1 / num2;
+	}else{
+		result = "지원하지 않는 연산자 입니다."
+	}
+	alert(num1 + op + num2 + "=" + result);
+</script>
+
 </body>
 </html>
