@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>exam</title>
+<link rel="stylesheet" href="common.css" />
+<style>
+	.img_frame{}
+	.img_frame li{display:none}
+	.img_frame li.active{display:block}
+</style>
+<script src="../js/libs/jquery-1.12.4.min.js"></script>
+<script>
+$(document).ready(function(){
+	
+});
+</script>
+</head>
+<body>
+<!-- wrapper [s] -->
+<div id="wrapper">
+	<!-- header [s] -->
+	<div id="header">
+	</div>
+	<!-- header [e] -->
+	<hr />
+	<!-- container [s] -->
+	<div id="container">
+        <div class="gallery_wrap">
+            <h1>이미지 갤러리</h1>
+            <div class="img_frame"><!-- 부모 -->
+                <ul>
+                    <li class="active"><img src="img/image1.jpg" alt=""></li>
+					<li><img src="img/image2.jpg" alt=""></li>
+					<li><img src="img/image3.jpg" alt=""></li>
+					<li><img src="img/image4.jpg" alt=""></li>
+                </ul>
+            </div>
+            <button type="button" class="btn_prev">이전</button>
+            <button type="button" class="btn_next">다음</button>
+        </div>
+	</div>
+	<!-- container [e] -->
+	<hr />
+	<!-- footer [s] -->
+	<div id="footer">
+	</div>
+	<!-- footer [e] -->
+</div>
+<!-- wrapper [e] -->
+</body>
+</html>
