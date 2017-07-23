@@ -8,44 +8,27 @@
 <body>
 
 <script>
-	var num1  = window.prompt('첫 번째 숫자값을 입력해 주세요.');
-	var op = window.prompt('사칙연산자 중 하나를 입력해 주세요.');
-	var num2 = window.prompt('두 번째 숫자값을 입력해 주세요.');
-	var result;
-	
-	num1 = parseInt(num1);
-	num2 = parseInt(num2);
-	
-// 	switch(op){
-//		case "+" : 
-//			result = num1 + num2;
-//			break;
-//		case "-" :
-//			result = num1 - num2;
-//			break;
-//		case "*" :
-//			result = num1 * num2;
-//			break;
-//		case "/" :
-//			result = num1 / num2;
-//			break;
-//		default :
-//			result = "지원하지 않는 연산자 입니다."
-//			break;
-//	};
-	
-	if(op === "+"){
-		result = num1 + num2;
-	}else if(op === "-"){
-		result = num1 - num2;
-	}else if(op === "*"){
-		result = num1 * num2;
-	}else if(op === "/"){
-		result = num1 / num2;
-	}else{
-		result = "지원하지 않는 연산자 입니다."
+	var a = 0;
+	while(a < 10){
+		a++;
+		if(a==3||a==6){
+			continue;
+		}
+		console.log(a);
 	}
-	alert(num1 + op + num2 + "=" + result);
+	
+	var tags = [];
+	for(var i = 1, max = 10; i<max; i++){
+		tags.push('<ul>');
+		for(var j = 1, jmax = 10, j<jmax; j++){
+			tags.push('li');
+			tags.push(i + '*' + j + '=' + (i*j));
+			tags.push('</li>');
+		}
+		tags.push('</ul>');
+	}
+	box.get(0).innerHTML = tags.join('');
+	//전체 태그들을 배열에 삽입한 후 한번에 출력함. 
 </script>
 
 </body>

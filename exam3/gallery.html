@@ -6,14 +6,47 @@
 <title>exam</title>
 <link rel="stylesheet" href="common.css" />
 <style>
-	.img_frame{}
-	.img_frame li{display:none}
+	.img_frame{position:relative;height:267px}
+	.img_frame li{display:none;position:absolute;left:0;top:0}
 	.img_frame li.active{display:block}
 </style>
 <script src="../js/libs/jquery-1.12.4.min.js"></script>
 <script>
 $(document).ready(function(){
+	var gallery_wrap = $('.gallery_wrap').eq(0),
+		img_frame = gallery_wrap.find('.img_frame');
+		frame_wrap = img_frame.find('ul'),
+		frame_list = frame_wrap.find('li'),
+		prevBtn = gallery_wrap.find('.btn_prev'),
+		nextBtn = gallery_wrap.find('.btn_next'),
+		idx = 0,
+		oldIdx = idx;
 	
+	var setClass = function(){
+		frame_list.eq(oldIdx).fadeOut(500);
+		frame_list.eq(idx).fadeIn(500);
+		oldIdx = idx;
+	}
+	
+	var prevFunc = function(){	
+		if( idx <= 0 ){
+			idx = frame_list.length -1;
+		}else{
+			idx--;
+		}
+		setClass();
+	};
+	var nextFunc = function(){
+		if(idx >= frame_list.length -1){
+			idx = 0;
+		}else{
+			idx++;
+		}
+		setClass();
+	};
+	
+	prevBtn.on('click', prevFunc);
+	nextBtn.on('click', nextFunc);
 });
 </script>
 </head>

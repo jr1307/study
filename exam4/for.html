@@ -5,17 +5,79 @@
 <meta charset="utf-8">
 <title>exam</title>
 <link rel="stylesheet" href="common.css" />
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="../js/libs/jquery-1.12.4.min.js"></script>
 <script>
-$(function(){
+$(document).ready (function(){
+	
+	var exam_wrap = $('.exam_wrap').eq(0),
+		exam_q = exam_wrap.find('.exam_q'),
+		num = 5,
+		start = 0,
+		tags =[];
+	
+	while(start < num){
+		start++;
+		tags.push('<input type="text"> <br>');
+		console.log(start);
+	}
+	exam_q.get(0).innerHTML = tags.join('');
 
-	// exam1 [s]
-	// var exam1 = $('.exam_q').eq(0);
-	// exam1.append('<input type="checkbox">');
-	// exam1 [e]
+////////////////////////////////////////////////////////////////////////////////	
+	
+	var exam_wrap2 = $('.exam_wrap').eq(1),
+		exam_q2 = exam_wrap2.find('.exam_q'),
+		num2 = 5,
+		tags2 = [],
+		type1 = "text",
+		type2 = "checkbox";
+	
+	for(start2=0; start2 < num2; start2++){
+		if(start2 % 2 == 0){
+			tags2.push('<input type="text"><br>');
+		}else{
+			tags2.push('<input type="checkbox" id="chk' + start2 + '"><label for="chk' + start2 + '"> 체크박스</label> <br>');
+		}
+		
+	}
+	exam_q2.get(0).innerHTML = tags2.join('');
 
-	// var exam3 = $('.exam_q').eq(2);
-	// exam3.append('8 X 1 = 8 <br>');
+////////////////////////////////////////////////////////////////////////////////	
+	
+	var exam_wrap3 = $('.exam_wrap').eq(2),
+		exam_q3 = exam_wrap3.find('.exam_q'),
+		start3 = 8,
+		end_num = 9,
+		tags3 = [];
+	
+	tags3.push('<ul>');
+	for(i = 1; i<=end_num; i++){
+		tags3.push('<li>');
+		tags3.push(start3 + '*' + i + '=' + (start3 * i))
+		tags3.push('</li>')
+	}
+	tags3.push('</ul>');
+	exam_q3.get(0).innerHTML = tags3.join('');
+	
+////////////////////////////////////////////////////////////////////////////////	
+	
+	var exam_wrap4 = $('.exam_wrap').eq(3),
+		exam_q4 = exam_wrap4.find('.exam_q'),
+		start4 = 2,
+		end_num2 = 9,
+		tags4 = [];
+	
+	while(start4 <= end_num2){
+		tags4.push('<h2>'+start4+'단</h2>');
+		tags4.push('<ul>');
+		for(k = 1; k <= end_num2; k++){
+			tags4.push('<li>');
+			tags4.push( start4 + "*" + k + "=" + (start4*k) );
+			tags4.push('</li>');
+		}
+		tags4.push('</ul>');
+		start4++;
+	}
+	exam_q4.get(0).innerHTML = tags4.join('');
 	
 });
 </script>
