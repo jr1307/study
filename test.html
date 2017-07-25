@@ -8,27 +8,18 @@
 <body>
 
 <script>
-	var a = 0;
-	while(a < 10){
-		a++;
-		if(a==3||a==6){
-			continue;
-		}
-		console.log(a);
-	}
-	
-	var tags = [];
-	for(var i = 1, max = 10; i<max; i++){
-		tags.push('<ul>');
-		for(var j = 1, jmax = 10, j<jmax; j++){
-			tags.push('li');
-			tags.push(i + '*' + j + '=' + (i*j));
-			tags.push('</li>');
-		}
-		tags.push('</ul>');
-	}
-	box.get(0).innerHTML = tags.join('');
-	//전체 태그들을 배열에 삽입한 후 한번에 출력함. 
+var obj = {
+   init : function () {
+    	obj2.init();
+	   // 객체 obj2 의 init 을 호출해봐요~
+   }
+};
+var obj2 = {
+   init : function () {
+      console.log('call');
+   }
+};
+obj.init();
 </script>
 
 </body>
