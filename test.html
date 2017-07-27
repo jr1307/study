@@ -8,18 +8,37 @@
 <body>
 
 <script>
-var obj = {
-   init : function () {
-    	obj2.init();
-	   // 객체 obj2 의 init 을 호출해봐요~
-   }
-};
-var obj2 = {
-   init : function () {
-      console.log('call');
-   }
-};
-obj.init();
+
+//var arr = [];
+//var obj = {
+//   e : 'e',
+//   d : 'd',
+//   b : 'b',
+//   g : 'g',
+//   c : 'c',
+//   f : 'f',
+//   a : 'a'
+//};
+//
+//for(var key in obj){
+//	arr.push(obj[key]);	
+//	arr.sort();
+//}
+//
+//console.log(arr)
+	
+var obj = {};
+var arr = "bcaebe".split('').sort();	
+for(var i = 0; i< arr.length; i++){
+	
+	if(obj.hasOwnProperty(arr[i])){
+		obj[arr[i]] = obj[arr[i]] + 1;
+	}else{
+		obj[ arr[i] ] = 1;
+	}
+	
+}
+console.log(obj)
 </script>
 
 </body>
