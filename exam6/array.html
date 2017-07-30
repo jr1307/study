@@ -5,7 +5,144 @@
 <meta charset="utf-8">
 <title>exam</title>
 <link rel="stylesheet" href="common.css" />
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="../js/libs/jquery-1.12.4.min.js"></script>
+<script>
+$(document).ready (function(){
+	
+	var exam_wrap1 = $('.exam_wrap').eq(0),
+		exam_q1 = exam_wrap1.find('.exam_q'),
+		btn1 = exam_wrap1.find('button'),
+		arr = ['Lee','Jung','Rim'];
+	
+	var func1 = function(){
+		console.log(arr.join(''));
+		exam_q1.get(0).innerHTML = arr.join('')
+	}
+	
+	btn1.on('click', func1);
+
+//////////////////////////////////////////////////
+	
+	var exam_wrap2 = $('.exam_wrap').eq(1),
+		exam_q2 = exam_wrap2.find('.exam_q'),
+		btn2 = exam_wrap2.find('button'),
+		str = "question",
+		result = "";
+	
+	var func2 = function(){
+		for(var i = str.length-1; i>=0; i--){
+			result += str[i];
+		}
+		console.log(result)
+	}
+	
+	btn2.on('click', func2);
+	
+//////////////////////////////////////////////////
+	
+	var exam_wrap3 = $('.exam_wrap').eq(2),
+		exam_q3 = exam_wrap3.find('.exam_q'),
+		btn3 = exam_wrap3.find('button'),
+		arr2 = [40, 100, 1, 5, 25, 10],
+		resultArr = [];
+	
+	var func3 = function(){
+		var sortArr = arr2.sort(function(a, b){
+			return b-a;
+		});
+		sortArr.push();
+		
+	}
+	
+	btn3.on('click', func3);
+	
+	
+//////////////////////////////////////////////////
+	
+	var exam_wrap4 = $('.exam_wrap').eq(3),
+		exam_q4 = exam_wrap4.find('.exam_q'),
+		btn4 = exam_wrap4.find('button'),
+		arr3 = [];
+	
+	var func4= function(){
+		for( var n = 2; n <= 9; n++ ){
+			arr3[n] = [];
+			for(var j = 1; j <= 9; j++){
+				arr3[n][j] = n * j;	
+				
+			}
+		}
+		console.log(arr3)
+	}
+	
+	btn4.on('click', func4);
+	
+
+//////////////////////////////////////////////////
+	
+	var exam_wrap5 = $('.exam_wrap').eq(4),
+		exam_q5 = exam_wrap5.find('.exam_q'),
+		btn5 = exam_wrap5.find('button'),
+		arr4 = [];
+	
+	var func5 = function(){
+		for(var k = 0; k <= 9; k++){
+			arr4[k] = k
+		}
+		console.log(arr4)
+	}
+	
+	btn5.on('click', func5);
+	
+//////////////////////////////////////////////////
+	
+	var exam_wrap6 = $('.exam_wrap').eq(5),
+		exam_q6 = exam_wrap6.find('.exam_q'),
+		btn6 = exam_wrap6.find('button'),
+		arr5 = [];
+	
+	var func6 = function(){
+		for(var l = 0; l <= 5; l++){
+			arr[l] = Math.floor(Math.random() * 5);
+		}
+		console.log(arr)
+	}
+	
+	btn6.on('click', func6);
+	
+//////////////////////////////////////////////////
+	
+	var exam_wrap7 = $('.exam_wrap').eq(6),
+		exam_q7 = exam_wrap7.find('.exam_q'),
+		btn7 = exam_wrap7.find('button'),
+		arr6 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+	
+	var func7 = function(){
+		var randomN = Math.floor(Math.random()*10);
+		console.log(arr6[randomN])
+	}
+	
+	btn7.on('click', func7);
+	
+//////////////////////////////////////////////////
+	
+	var exam_wrap8 = $('.exam_wrap').eq(7),
+		exam_q8 = exam_wrap8.find('.exam_q'),
+		btn8 = exam_wrap8.find('button'),
+		arr7 = [];
+		
+	
+	var func8 = function(){
+		for(var m = 0; m <= 5; m++){
+			var randomN2 = Math.floor(Math.random()*5);
+			arr7[m] = randomN2;
+		}
+		console.log(arr7)
+	}
+	
+	btn8.on('click', func8);
+});
+</script>
 </head>
 <body>
 <!-- wrapper [s] -->
