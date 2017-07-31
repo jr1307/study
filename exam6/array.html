@@ -9,144 +9,272 @@
 <script>
 $(document).ready (function(){
 	
-	var exam_wrap1 = $('.exam_wrap').eq(0),
-		exam_q1 = exam_wrap1.find('.exam_q'),
-		btn1 = exam_wrap1.find('button'),
-		arr = ['Lee','Jung','Rim'];
-	
-	var func1 = function(){
-		//console.log(arr.join(''));
-		exam_q1.get(0).innerHTML = arr.join('')
-	}
-	
-	btn1.on('click', func1);
-
-//////////////////////////////////////////////////
-	
-	var exam_wrap2 = $('.exam_wrap').eq(1),
-		exam_q2 = exam_wrap2.find('.exam_q'),
-		btn2 = exam_wrap2.find('button'),
-		str = "question",
-		result = "";
-	
-	var func2 = function(){
-		for(var i = str.length-1; i>=0; i--){
-			result += str[i];
+	var exam1 = {
+		init : function () {
+			this.setElements();
+			this.initLayout();
+			this.bindEvents();
+		},
+		setElements : function(){
+			this.exam_wrap = $('.exam_wrap').eq(0);
+			this.exam_q = this.exam_wrap.find('.exam_q');
+			this.btn = this.exam_wrap.find('button');
+		},
+		initLayout : function () {
+			this.arr = ['Lee','Jung','Rim'];
+		},
+		bindEvents : function(){
+			this.btn.on('click', $.proxy(this.onClickFunc, this));
+		},
+		onClickFunc : function(){
+			this.viewFunc();
+		},
+		viewFunc : function(){
+			this.exam_q.get(0).innerHTML = this.arr.join('');
 		}
-		//console.log(result)
-		exam_q2.get(0).innerHTML = result
 	}
+	exam1.init();
 	
-	btn2.on('click', func2);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-//////////////////////////////////////////////////
-	
-	var exam_wrap3 = $('.exam_wrap').eq(2),
-		exam_q3 = exam_wrap3.find('.exam_q'),
-		btn3 = exam_wrap3.find('button'),
-		arr2 = [40, 100, 1, 5, 25, 10],
-		resultArr = [],
-		cloneArr = arr2.slice(0);
-	
-	var func3 = function(){
-		var sortArr = arr2.sort(function(a, b){
-			return b-a;
-		});
-		sortArr.push();
-		//console.log(sortArr)
-		exam_q3.get(0).innerHTML = sortArr
-	}
-	
-	btn3.on('click', func3);
-	
-	
-//////////////////////////////////////////////////
-	
-	var exam_wrap4 = $('.exam_wrap').eq(3),
-		exam_q4 = exam_wrap4.find('.exam_q'),
-		btn4 = exam_wrap4.find('button'),
-		arr3 = [];
-	
-	var func4= function(){
-		for( var n = 2; n <= 9; n++ ){
-			arr3[n] = [];
-			for(var j = 1; j <= 9; j++){
-				arr3[n][j] = n * j;	
-				
+	var exam2 = {
+		init : function(){
+			this.setElements();
+			this.bindEvents();
+			this.initLayout();
+		},
+		setElements : function(){
+			this.exam_wrap = $('.exam_wrap').eq(1);
+			this.exam_q = this.exam_wrap.find('.exam_q');
+			this.btn = this.exam_wrap.find('button');
+		},
+		initLayout : function () {
+			this.str = "question",
+			this.result = "";
+		},
+		bindEvents : function(){
+			this.btn.on('click', $.proxy(this.onClickFunc, this));
+		},
+		onClickFunc : function(){
+			for(var i = this.str.length-1; i>=0; i--){
+				this.result += this.str[i];
 			}
+			this.viewFunc();
+		},
+		viewFunc : function(){
+			this.exam_q.get(0).innerHTML = this.result;
 		}
-		//console.log(arr3)
-		exam_q4.get(0).innerHTML = arr3
-	}
-	
-	btn4.on('click', func4);
-	
+	};
+	exam2.init();
 
-//////////////////////////////////////////////////
+////////////////////////////////////////////////////
+//	
 	
-	var exam_wrap5 = $('.exam_wrap').eq(4),
-		exam_q5 = exam_wrap5.find('.exam_q'),
-		btn5 = exam_wrap5.find('button'),
-		arr4 = [];
-	
-	var func5 = function(){
-		for(var k = 0; k <= 9; k++){
-			arr4[k] = k
+	var exam3 = {
+		init : function(){
+			this.setElements();
+			this.bindEvents();
+			this.initLayout();
+		},
+		setElements : function(){
+			this.exam_wrap = $('.exam_wrap').eq(2);
+			this.exam_q = this.exam_wrap.find('.exam_q');
+			this.btn = this.exam_wrap.find('button');
+		},
+		initLayout : function () {
+			this.arr = [40, 100, 1, 5, 25, 10],
+			this.resultArr = [],
+			this.cloneArr = this.arr.slice(0, 6);
+		},
+		bindEvents : function(){
+			this.btn.on('click', $.proxy(this.onClickFunc, this));
+		},
+		onClickFunc : function(){
+			this.sortArr = this.arr.sort(function(a, b){
+				return b-a;
+			});
+			for(i = 0; i<= this.arr.length; i++){
+				for(j = 0; j <= this.cloneArr.length; j++){
+					if(this.sortArr[i] === this.cloneArr[j]){
+						this.resultArr.push(j)
+					}
+				}
+			}
+			this.viewFunc();
+		},
+		viewFunc : function(){
+			this.exam_q.get(0).innerHTML = this.resultArr;
 		}
-		//console.log(arr4)
-		exam_q5.get(0).innerHTML = arr4;
 	}
+	exam3.init();
+//	
+////////////////////////////////////////////////////
+//	
 	
-	btn5.on('click', func5);
-	
-//////////////////////////////////////////////////
-	
-	var exam_wrap6 = $('.exam_wrap').eq(5),
-		exam_q6 = exam_wrap6.find('.exam_q'),
-		btn6 = exam_wrap6.find('button'),
-		arr5 = [];
-	
-	var func6 = function(){
-		for(var l = 0; l <= 5; l++){
-			arr5[l] = Math.floor(Math.random() * 5);
+	var exam4 = {
+		init : function(){
+			this.setElements();
+			this.bindEvents();
+			this.initLayout();
+		},
+		setElements : function(){
+			this.exam_wrap = $('.exam_wrap').eq(3);
+			this.exam_q = this.exam_wrap.find('.exam_q');
+			this.btn = this.exam_wrap.find('button');
+		},
+		initLayout : function(){
+			this.arr = [];	
+		},
+		bindEvents : function(){
+			this.btn.on('click', $.proxy(this.onClickFunc, this));
+		},
+		onClickFunc : function(){
+			for( var i = 2; i <= 9; i++ ){
+				this.arr[i] = [];
+				for(var j = 1; j <= 9; j++){
+					this.arr[i][j] = i * j;	
+
+				}
+			}
+			this.viewFunc();
+		},
+		viewFunc : function(){
+			this.exam_q.get(0).innerHTML = this.arr;
 		}
-		exam_q6.get(0).innerHTML = arr5;
 	}
-	
-	btn6.on('click', func6);
-	
-//////////////////////////////////////////////////
-	
-	var exam_wrap7 = $('.exam_wrap').eq(6),
-		exam_q7 = exam_wrap7.find('.exam_q'),
-		btn7 = exam_wrap7.find('button'),
-		arr6 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-	exam_q7.get(0).innerHTML = arr6;
-	var func7 = function(){
-		var randomN = Math.floor(Math.random()*10);
-		arr6.splice(randomN, 1)
-		exam_q7.get(0).innerHTML = arr6;
-	}
-	
-	btn7.on('click', func7);
-	
-//////////////////////////////////////////////////
-	
-	var exam_wrap8 = $('.exam_wrap').eq(7),
-		exam_q8 = exam_wrap8.find('.exam_q'),
-		btn8 = exam_wrap8.find('button'),
-		arr7 = [];
-		
-	var func8 = function(){
-		for(var m = 0; m <= 5; m++){
-			var randomN2 = Math.floor(Math.random()*5);
-			arr7[m] = randomN2;
+	exam4.init();
+//	
+//
+////////////////////////////////////////////////////
+
+//	
+	var exam5 = {
+		init : function(){
+			this.setElements();
+			this.bindEvents();
+			this.initLayout();
+		},
+		setElements : function(){
+			this.exam_wrap = $('.exam_wrap').eq(4);
+			this.exam_q = this.exam_wrap.find('.exam_q');
+			this.btn = this.exam_wrap.find('button');
+		},
+		initLayout : function(){
+			this.arr = [];	
+		},
+		bindEvents : function(){
+			this.btn.on('click', $.proxy(this.onClickFunc, this));
+		},
+		onClickFunc : function(){
+			for(var i = 0; i <= 9; i++){
+				this.arr[i] = i
+			}
+			this.viewFunc();
+		},
+		viewFunc : function(){
+			this.exam_q.get(0).innerHTML = this.arr;
 		}
-		//console.log(arr7)
-		exam_q8.get(0).innerHTML = arr7;
 	}
+	exam5.init();
 	
-	btn8.on('click', func8);
+////////////////////////////////////////////////////
+//	
+	var exam6 = {
+		init : function(){
+			this.setElements();
+			this.bindEvents();
+			this.initLayout();
+		},
+		setElements : function(){
+			this.exam_wrap = $('.exam_wrap').eq(5);
+			this.exam_q = this.exam_wrap.find('.exam_q');
+			this.btn = this.exam_wrap.find('button');
+		},
+		initLayout : function(){
+			this.arr = [];	
+		},
+		bindEvents : function(){
+			this.btn.on('click', $.proxy(this.onClickFunc, this));
+		},
+		onClickFunc : function(){
+			for(var i = 0; i <= 5; i++){
+			this.arr[i] = Math.floor(Math.random() * 5);
+		}
+			this.viewFunc();
+		},
+		viewFunc : function(){
+			this.exam_q.get(0).innerHTML = this.arr;
+		}
+	}
+	exam6.init();
+//	
+////////////////////////////////////////////////////
+//	
+	var exam7 = {
+		init : function(){
+			this.setElements();
+			this.bindEvents();
+			this.initLayout();
+		},
+		setElements : function(){
+			this.exam_wrap = $('.exam_wrap').eq(6);
+			this.exam_q = this.exam_wrap.find('.exam_q');
+			this.btn = this.exam_wrap.find('button');
+		},
+		initLayout : function(){
+			this.arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];	
+		},
+		bindEvents : function(){
+			this.btn.on('click', $.proxy(this.onClickFunc, this));
+		},
+		onClickFunc : function(){
+			this.randomN = Math.floor(Math.random()*10);
+			this.arr.splice(this.randomN, 1)
+			this.viewFunc();
+		},
+		viewFunc : function(){
+			this.exam_q.get(0).innerHTML = this.arr;
+		}
+	}
+	exam7.init();
+//	
+////////////////////////////////////////////////////
+//	
+	var exam8 = {
+		init : function(){
+			this.setElements();
+			this.bindEvents();
+			this.initLayout();
+		},
+		setElements : function(){
+			this.exam_wrap = $('.exam_wrap').eq(7);
+			this.exam_q = this.exam_wrap.find('.exam_q');
+			this.btn = this.exam_wrap.find('button');
+		},
+		initLayout : function(){
+			this.arr = [];	
+		},
+		bindEvents : function(){
+			this.btn.on('click', $.proxy(this.onClickFunc, this));
+		},
+		onClickFunc : function(){
+			for(var i = 0; i < 5; i++){
+				this.randomN = Math.floor(Math.random()*6);
+				this.arr[i] = this.randomN;
+				for(j=0; j<i; j++){
+					if(this.arr[i] === this.arr[j]){
+						this.arr.pop();
+						i--;
+					}
+				}
+			}
+			this.viewFunc();
+		},
+		viewFunc : function(){
+			this.exam_q.get(0).innerHTML = this.arr;
+		}
+	}
+	exam8.init();
 });
 </script>
 </head>
