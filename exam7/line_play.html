@@ -25,23 +25,23 @@
 				this.btnRandom = this.playWrap.find('button')
 			},
 			initLayout : function(){
-				this.swiperSlide.eq(this.randomN).show();
+				this.swiperSlide.eq(this.randomN).show(); //초기 아바타 랜덤 노출
 				//console.log(this.randomN)
 			},
-			arrFunc : function(){
-				this.arr = [];
+			arrFunc : function(){ 
+				this.arr = []; // li갯수 만큼 배열 생성
 				for(i=0; i<this.swiperSlide.length; i++){
 					this.arr.push(i)
 				}
 			},
 			randomFunc : function(){
-				this.randomN = Math.floor(Math.random() * this.arr.length );
-				this.curIdx = this.arr[this.randomN];
+				this.randomN = Math.floor(Math.random() * this.arr.length ); //배열길이 만큼의 랜덤수 생성 ****
+				this.curIdx = this.arr[this.randomN]; // 생성된 랜덤수 인덱스번호 의 값 (배열의 인덱스가 아닌 해당인덱스 안에 값을 가져옴)
 //				console.log(this.randomN)
 			},
 			loopFunc : function(){
-				while(this.oldIdx === this.curIdx){
-					this.randomFunc();
+				if(this.oldIdx === this.curIdx){
+					this.randomFunc();//마지막 배열값과 현재 배열값 비교 하여 같으면 랜덤함수 다시 실행해 curIdx값 받아옴
 				}	
 			},
 			bindEvents : function(){
@@ -49,21 +49,20 @@
 			},
 			onClickFunc : function(){
 				
-				this.arr.splice(this.randomN, 1);
+				this.arr.splice(this.randomN, 1); //노출된 아바타 배열에서 삭제
 				this.oldIdx = this.curIdx;
 				this.swiperSlide.eq(this.oldIdx).hide();
 				this.randomFunc();
 				this.swiperSlide.eq(this.curIdx).show();
-				console.log(this.arr,this.curIdx);
-				if(this.arr.length === 0){
-					
+				//console.log(this.arr,this.curIdx);
+				if(this.arr.length === 0){ //배열이 다 삭제되면 초기화(배열 새로 생성, 초기 아바타 랜덤 노출, curIdx값 생성)
 					this.arrFunc();
 					this.randomFunc();
 					this.initLayout();
-					this.loopFunc();
-					console.log(this.curIdx);
+					this.loopFunc(); 
+					//console.log(this.curIdx);
 				}
-			console.log(this.arr, this.oldIdx, this.curIdx);
+			//console.log(this.arr, this.oldIdx, this.curIdx);
 				
 			},
 			viewFunc : function(){
