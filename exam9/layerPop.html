@@ -18,6 +18,7 @@ button::-moz-focus-inner{padding:0;border:0}
 .layer_area .layer_dimmed{position:absolute;left:0;top:0;right:0;bottom:0;width:100%;height:100%;background:#000;opacity:0.3;filter:alpha(opacity=30);}
 .layer_pos{position:absolute;left:50%;top:50%;width:400px;height:400px;margin:-220px 0 0 -220px;padding:20px;background:#fff}
 .layer_close{position:absolute;right:20px;top:20px}
+.blind_focus{position:absolute;left:0;top:0;width:1px;height:1px;}
 /* //temporary css */
 </style>
 </head>
@@ -59,8 +60,50 @@ button::-moz-focus-inner{padding:0;border:0}
 <script src="../js/libs/jquery.ba-outside-events.min.js"></script>
 <script>
 (function (win, $) {
-
-
+var exam = {
+	init : function(){
+		this.setElements();
+		this.initialFunc();
+		this.bindEvents();
+	},
+	setElements : function(){
+		this.layerArea = $('.js-layer_area');
+		this.layerPos = this.layerArea.find('.layer_pos');
+		this.layerClose = this.layerArea.find('.layer_close button');
+		this.btnPos = $('.js-btn_pos button');
+	},
+	initialFunc : function(){
+		var blindSpan = "<span class='blind_focus' tabindex='0'></span>"
+		this.layerArea.hide();
+		this.layerPos.attr('tabindex','0');
+		this.layerPos.before(blindSpan); //span태그 삽입
+		this.layerPos.after(blindSpan); //span태그 삽입
+		this.prevTag = this.layerPos.prev(); //span태그 가져옴
+		this.nextTag = this.layerPos.next(); //span태그 가져옴
+	},
+	bindEvents : function(){
+		this.btnPos.on('click', $.proxy(this.onClickFunc, this));	
+		this.layerClose.on('click', $.proxy(this.onCloseFunc, this));
+		this.nextTag.on('focusin', $.proxy(this.nextTagFunc, this));
+		this.prevTag.on('focusin', $.proxy(this.prevTagFunc, this));
+	},
+	nextTagFunc : function(){
+		this.layerPos.focus();
+	},
+	prevTagFunc : function(){
+		this.layerClose.focus();
+	},
+	onClickFunc : function(e){
+		this.currentBtn = $(e.currentTarget);
+		this.layerArea.show();
+		this.layerPos.focus();
+	},
+	onCloseFunc : function(){
+		this.layerArea.hide();
+		this.currentBtn.focus();
+	}
+}
+exam.init();
 })(window, window.jQuery);
 </script>
 </body>
