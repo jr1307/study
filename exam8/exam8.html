@@ -13,6 +13,7 @@ $(document).ready (function(){
 			this.setElements();
 			this.bindEvents();
 			this.boolFunc();
+			this.initScroll();
 		},
 		setElements : function(){
 			this.evt_ct = $('.evt_ct');
@@ -28,12 +29,24 @@ $(document).ready (function(){
 			this.playGame = false;	//false면 초기값, true면 게임실행함
 			this.finishGame = false;	//false면 초기값, 게임 한번 실행하면 true대입
 		},
+		initScroll: function(){
+			setTimeout(function(){
+				scrollTo(0,0);
+			});
+		},
+		typeCommon : function(){
+			this.idx = $(event.currentTarget).parents('li').index(); //선택한 라벨을 가지는 li의 인덱스값
+			//$(e.target) = 클릭한 영역의 엘리먼트를 체크함
+			//$(e.currentTarget) = 이벤트를 가지는 엘리먼트를 체크함 (this)
+			//예) <a href=""><img src="img.jpg" alt=""></a> 
+			//$(e.target) = img태그를 가져옴 
+			//$(e.currentTarget) = a태그를 가져옴 
+		},
 		type1 : function(){
-			this.idx = $(event.target).parents('li').index(); //선택한 라벨을 가지는 li의 인덱스값
+			this.typeCommon();
 		},
 		type2 : function(){
-			this.idx = $(event.target).parents('li').index();
-			//console.log(this.idx);
+			this.typeCommon();
 			this.randomFunc();
 		},
 		randomFunc : function(){
@@ -74,11 +87,8 @@ $(document).ready (function(){
 		},
 		setMove : function(){
 			$('html, body').animate({scrollTop : "450px"}, 300);
-			this.gomList.eq(this.idx).find('.gom').delay(400).animate({top:'100px'}, 300);
-			//this.setClass(callback);
-			setTimeout( function(){
-				exam.setClass(); //여기서 this는 window를 바라본기 때문에 this.setClass를 하면 실행이 안된다. 
-			}, 800 )
+			this.gomList.eq(this.idx).find('.gom').delay(400).animate({top:'100px'}, $.proxy(this.setClass, this) );
+			//setTimeout($.proxy(this.setClass, this), 800 )
 		},
 		setClass : function(){
 			this.gomList.eq(this.idx).addClass('winlane');

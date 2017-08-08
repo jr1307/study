@@ -7,27 +7,16 @@
 	<script src="js/libs/jquery-1.12.4.min.js"></script>
 	<script>
 	$(document).ready (function(){
-		$('.bxlst li label').click(function(){
-			console.log($(this))
-		});
+		$('a').click(function(event){
+			 //alert(event.currentTarget === this); //true
+			 alert(event.target === this); //false
+		})
 	});
 	</script>
 </head>
 <body>
 
-<ul class="bxlst" id="clickLst">
-<li class="rabx">
-	<input type="radio" name="beautybox" id="bx"/>
-	<label for="bx"><span class="blind">스키타는 베어</span></label>
-</li>
-<li class="rabx">
-	<input type="radio" name="beautybox" id="bx2"/>
-	<label for="bx2"><span class="blind">보드타는 베어</span></label>
-</li>
-<li class="rabx">
-	<input type="radio" name="beautybox" id="bx3"/>
-	<label for="bx3"><span class="blind">스케이트 베어</span></label>
-</li>
-</ul>
+<a href=""><img src="exam8/img/evt_tit.jpg" alt=""></a>
+
 </body>
 </html>
