@@ -12,10 +12,8 @@
 		var exam = {
 			init : function(){
 				this.setElements();
+				this.initialFunc();
 				this.bindEvents();
-				this.arrFunc(); // li갯수 만큼 배열 생성
-				this.randomFunc(); // 초기 로딩시에 랜덤으로 idx뽑아서 li eq값에 보냄
-				this.initialFunc(); // 초기 로딩시에 li노출
 			},
 			setElements : function(){
 				this.playWrap = $('.js-play-wrap').eq(0),
@@ -24,44 +22,31 @@
 				this.swiperSlide = this.swiperWrap.find('li'),
 				this.btnRandom = this.playWrap.find('button')
 			},
-			setFunc : function(){
-				this.arrFunc();
-				this.randomFunc();
-				this.initialFunc();
-				this.loopFunc();
-			},
-			arrFunc : function(){
-				this.arr = [];
-				for(i=0; i<this.swiperSlide.length; i++){
-					this.arr.push(i); //li 갯수 만큼 생성한 배열안에 0부터 li길이 만큼 배열안에 집어넣음
-				}
-				//console.log(this.arr)
-			},
-			randomFunc : function(){
-				this.randomN = Math.floor(Math.random()*this.arr.length);
-				this.curIdx = this.arr[this.randomN]; // 랜덤으로 생성한 숫자 번째의 값을 가져옴
-				this.oldIdx = this.curIdx;
-			},
 			initialFunc : function(){
-				//console.log(this.idx);
-				this.swiperSlide.eq(this.randomN).show();	
+				this.arrFunc();
+				this.getRandomFunc();
+				this.swiperSlide.eq(this.idx).show();
+				//console.log(this.swiperSlide.length)
 			},
-			loopFunc : function(){
-				if(this.oldIdx === this.curIdx){
-					this.randomFunc();
-				}
+			getRandomFunc : function(){
+				this.randomN = Math.floor(Math.random()*this.swiperSlide.length);
+				this.idx = this.randomN;
 			},
 			bindEvents : function(){
 				this.btnRandom.on('click', $.proxy(this.onClickFunc, this));
 			},
 			onClickFunc : function(){
-				this.arr.splice(this.randomN, 1); //노출된 아바타 배열에서 삭제
-				this.oldIdx = this.curIdx;
+				this.getRandomFunc();
 				this.swiperSlide.eq(this.oldIdx).hide();
-				this.randomFunc();
-				this.swiperSlide.eq(this.curIdx).show();
-				if(!this.arr.length){
-					this.setFunc();
+				this.swiperSlide.eq(this.idx).show();
+				this.oldIdx = this.Idx;
+//				console.log(this.arr);
+//				this.arr.splice()
+			},
+			arrFunc : function(){
+				this.arr = [];
+				for(i=0;i<this.swiperSlide.length; i++){
+					this.arr.push(i);
 				}
 			}
 		}
@@ -95,6 +80,16 @@
         <li class="swiper-slide">
             <span class="avatar_box">
                 <img src="img/avatar_02.jpg" alt="avatar image" class="img_avatar">
+            </span>
+        </li>
+        <li class="swiper-slide">
+            <span class="avatar_box">
+                <img src="img/avatar_03.jpg" alt="avatar image" class="img_avatar">
+            </span>
+        </li>
+        <li class="swiper-slide">
+            <span class="avatar_box">
+                <img src="img/avatar_04.jpg" alt="avatar image" class="img_avatar">
             </span>
         </li>
         </ul>

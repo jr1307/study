@@ -74,9 +74,6 @@ $(document).ready (function(){
 		onClickFunc : function(){
 			if(!this.playGame){
 				this.playGame = true
-			}else if(this.finishGame){
-				alert('이미 선택하셨습니다.');
-				return false;
 			}
 			
 			if(this.gameType){ // 게임타입 체크

@@ -83,9 +83,12 @@ var exam = {
 	},
 	bindEvents : function(){
 		this.btnPos.on('click', $.proxy(this.onClickFunc, this));	
-		this.layerClose.on('click', $.proxy(this.onCloseFunc, this));
+		this.layerClose.on('click', $.proxy(this.layerOutside, this));
 		this.nextTag.on('focusin', $.proxy(this.nextTagFunc, this));
 		this.prevTag.on('focusin', $.proxy(this.prevTagFunc, this));
+	},
+	outsideEvent : function () {
+		this.layerPos.on('clickoutside', $.proxy(this.layerOutside, this));
 	},
 	nextTagFunc : function(){
 		this.layerPos.focus();
@@ -97,10 +100,12 @@ var exam = {
 		this.currentBtn = $(e.currentTarget);
 		this.layerArea.show();
 		this.layerPos.focus();
+		var outsideTime = setTimeout($.proxy(this.outsideEvent, this), 30);
 	},
-	onCloseFunc : function(){
+	layerOutside : function(){
 		this.layerArea.hide();
 		this.currentBtn.focus();
+		this.layerPos.off('clickoutside');
 	}
 }
 exam.init();
