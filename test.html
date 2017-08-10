@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+	<script src="js/libs/jquery-1.12.4.min.js"></script>
+	<script src="js/libs/jquery-1.12.4.min.js"></script>
+	<script>
+	$(document).ready (function(){
+		$('a').click(function(event){
+			 //alert(event.currentTarget === this); //true
+			 alert(event.target === this); //false
+		})
+	});
+	</script>
+</head>
+<body>
+
+<a href=""><img src="exam8/img/evt_tit.jpg" alt=""></a>
+
+</body>
+</html>

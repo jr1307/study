@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<!-- <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi"> -->
+<title>bear</title>
+<link rel="stylesheet" type="text/css" href="css/coca.css">
+<script src="../js/libs/jquery-1.12.4.min.js"></script>
+<script>
+$(document).ready (function(){
+	var exam = {
+		init : function(){
+			this.setElements();
+			this.bindEvents();
+			this.boolFunc();
+			this.initScroll();
+		},
+		setElements : function(){
+			this.evt_ct = $('.evt_ct');
+			this.evt_ct2 = $('.evt_ct2');
+			this.rabxList = this.evt_ct.find('ul').children();
+			//this.btnLabel = this.rabxList.find('label');
+			this.btnInput = this.rabxList.find('input');
+			this.btnSelect = this.evt_ct.find('.btn');
+			this.gomList = this.evt_ct2.find('ul').children();
+			this.icoGom = this.gomList.find('.gom');
+		},
+		boolFunc : function(){
+			this.gameType = false; //게임 타입 - true = type1, false = type2(랜덤)
+			this.playGame = false;	//false면 초기값, true면 게임실행함
+			this.finishGame = false;	//false면 초기값, 게임 한번 실행하면 true대입
+		},
+		initScroll: function(){
+			setTimeout(function(){
+				scrollTo(0,0);
+			});
+		},
+		arrFunc : function(){ //  input을 가진 li갯수 만큼 배열생성
+			this.arr = [];
+			for(i=0; i<this.rabxList.length; i++){
+				this.arr.push(i)
+			}
+			//console.log(this.arr)
+		},
+		typeCommon : function(){
+			this.idx = $(event.currentTarget).parents('li').index(); //선택한 라벨을 가지는 li의 인덱스값
+			//$(e.target) = 클릭한 영역의 엘리먼트를 체크함
+			//$(e.currentTarget) = 이벤트를 가지는 엘리먼트를 체크함 (this)
+			//예) <a href=""><img src="img.jpg" alt=""></a> 
+			//$(e.target) = img태그를 가져옴 
+			//$(e.currentTarget) = a태그를 가져옴 
+		},
+		type1 : function(){
+			this.typeCommon();
+		},
+		type2 : function(){
+			this.typeCommon();
+			this.arrFunc();
+			this.randomFunc();
+		},
+		randomFunc : function(){
+			this.arr.splice(this.idx,1); //선택한 li인덱스값 삭제
+			this.randomN = Math.floor(Math.random()*this.arr.length); //남은 배열갯수에서 랜덤값 추출
+			this.idx = this.arr[this.randomN]; //추출된 랜덤값 인덱스에 대입
+//			if(this.idx === this.randomN){
+//				this.randomFunc();
+//			}
+//			
+		},
+		bindEvents : function(){
+			this.btnInput.on('change', $.proxy(this.onClickFunc, this)); //change이벤트는 input, textarea, select에만 사용 가능함. 요소값이 변경되었을때 실행
+			this.btnSelect.on('click', $.proxy(this.gameFunc, this));
+		},
+		onClickFunc : function(){
+			if(!this.playGame){
+				this.playGame = true
+			}
+			
+			if(this.gameType){ // 게임타입 체크
+				this.type1();
+			}else{
+				this.type2();	
+			}
+		},
+		gameFunc : function(){
+			if(!this.playGame){
+				alert('곰을 선택해주세요')
+			}else if(this.finishGame){
+				alert('이미 선택하셨습니다.');
+				return false;
+			}else if(this.playGame){
+				this.setMove();
+			}
+		},
+		setMove : function(){
+			$('html, body').animate({scrollTop : "450px"}, 300);
+			this.gomList.eq(this.idx).find('.gom').delay(400).animate({top:'100px'}, $.proxy(this.setClass, this) );
+			//setTimeout($.proxy(this.setClass, this), 800 )
+		},
+		setClass : function(){
+			this.gomList.eq(this.idx).addClass('winlane');
+			this.finishGame = true //게임실행하고 나면 true로 값 변경
+		}
+	}
+	exam.init();
+});
+</script>
+</head>
+<body>
+<div class="evt_wrap">
+	<div class="evt_tit">
+		<div class="tit_area">
+			<h2 class="blind">1등 곰도 맞추고 100% 경품까지 폴라베어를 잡아라!</h2>
+		</div>
+	</div>
+	
+	<div class="evt_ct">
+		<div class="evt_area">
+			<p class="blind">100% 당첨! 가장먼저 도착하는 폴라베어를 맞춰주세요</p>
+			<ul class="bxlst" id="clickLst">
+			<li class="rabx">
+				<input type="radio" name="beautybox" id="bx"/>
+				<label for="bx"><span class="blind">스키타는 베어</span></label>
+			</li>
+			<li class="rabx">
+				<input type="radio" name="beautybox" id="bx2"/>
+				<label for="bx2"><span class="blind">보드타는 베어</span></label>
+			</li>
+			<li class="rabx">
+				<input type="radio" name="beautybox" id="bx3"/>
+				<label for="bx3"><span class="blind">스케이트 베어</span></label>
+			</li>
+			</ul>
+			<a href="#" class="btn btn_app">choice</a>
+		</div>
+	</div>
+	
+	<div class="evt_ct2">
+		<ul class="game_area sp" id="gameLst">
+		<li class="lane"><div class="sp gom"></div></li>
+		<li class="lane2"><div class="sp gom"></div></li>
+		<li class="lane3"><div class="sp gom"></div></li>
+		</ul>
+	</div>
+
+	<div style="height:2000px"></div>
+	
+</div>
+</body>
+</html>

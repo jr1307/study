@@ -1,0 +1,27 @@
+@charset "utf-8";
+*{margin:0;padding:0}
+body{background-color:#f1f1f1;font-size:14px;font-family:'Nanum Gothic';line-height:200%;color:#555}
+h1,h2,h3,h4,h5,h6{text-align:left}
+a{color:#555}
+li{list-style:none}
+button,label{cursor:pointer}
+button::-moz-focus-inner{padding:0;border:0}
+hr{display:none}
+#wrapper{padding:0 10px}
+.sidebar{ position: fixed;top: 0;left: 0;bottom: 0;padding: 0;width: 300px;height: 100%;background-color: #fff;border-right: 1px solid #ddd;cursor: default;}
+.sidebar h1{margin: 0;padding: 90px 10px 25px 10px;text-align: center;font-size: 23px;font-weight: 400;line-height: 200%;color: #666;}
+.category_list{padding:10px 30px 0 30px}
+.category_list li{list-style: none;}
+.category_list li a{text-decoration:none;color: #888;}
+.container{ margin: 0 0 0 330px;padding: 0 0 70px 0;}
+.content{width:980px}
+.content_head{position: relative;padding-top:75px;text-align: center;}
+.content_head h2{padding:25px 0 50px 0; font-weight:normal;text-align: center;}
+.content_body{padding: 20px 15px 18px;background-color: #fff;border: 1px solid #ddd;line-height: 180%;word-break: break-all;}
+.content_body h3{padding:20px 0 10px 0}
+.content_body h4{border-bottom:1px solid #ddd;padding-bottom:5px}
+.sum_txt{padding:5px 15px;background-color:#f5f5f5}
+.code_bx{padding:20px 0 20px 40px;margin:0;font-family:Malgun Gothic;font-size:15px;white-space: pre-line;line-height: 23px;letter-spacing: 0.02em;background-color:#f5f5f5}
+.txt_list{padding-bottom:10px}
+.exam_list{padding:6px 0 10px}
+.exam_list li a{margin-right:10px}

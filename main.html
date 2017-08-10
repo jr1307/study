@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>JS STUDY</title>
+	<link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+<div id="wrapper">
+	<div class="header">
+		<div class="sidebar">
+			<h1>JS STUDY</h1>
+			<ul class="category_list">
+				<li><a href="#cont01">javascript 와 jQuery 비교</a></li>
+				<li><a href="#cont02">prototype 정리</a></li>
+				<li><a href="">조건문</a></li>
+				<li><a href="">반복문</a></li>
+				<li><a href="">함수와객체</a></li>
+				<li><a href="">배열</a></li>
+				<li><a href="">실습예제 - 아바타랜덤뽑기</a></li>
+				<li><a href="">실습예제 - 폴라베어를잡아라!</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="container">
+		<div class="content" id="cont01" style="display:">
+			<div class="content_head">
+				<h2>javascript 와 jQuery 비교</h2>
+			</div>
+			<div class="content_body">
+				<p>- 자바스크립트는 메서드를 이용해서 일일히 접근해야 하는 불편함이 있으며, IE하위버전에 지원하지 않는 기능들이 있어 크로스브라우징이 어렵다.</p>
+				<p>- 제이쿼리는 css작성방법과 동일하게 원하는 Element에 접근이 용이하며 크로스브라우징이 쉽다.</p>
+				<h3>element 접근방법 비교예제 바로보기</h3>
+				<div class="sum_txt">
+					<div class="exam_list">
+						<li><a href="exam1/selector_jQuery.html">selector_jQuery.html</a></li>
+						<li><a href="exam1/selector_javascript.html">selector_javascript.html</a></li>
+						<li><a href="exam1/selector2_jQuery.html">selector2_jQuery.html</a></li>
+						<li><a href="exam1/selector2_javascript.html">selector2_javascript.html</a></li>
+					</div>
+				</div>
+
+				<h3>element 접근방법</h3>
+				<div class="sum_txt">
+					<h4>javascript</h4>
+					<ul class="txt_list">
+						<li>document.getElementsById('id')</li>
+						<li>document.getElementsByTagName('tagName')</li>
+						<li>document.getElementsByClassName('class')</li>
+					</ul>
+					<h4>jQuery</h4>
+					<ul class="txt_list">
+						<li>$('#id')</li>
+						<li>$('.class')</li>
+						<li>$('tagName')</li>
+					</ul>
+				</div>
+
+				<h3>first-child</h3>
+				<div class="sum_txt">
+					<h4>javascript</h4>
+					<ul class="txt_list">
+						<li>.<strong>firstChild</strong> : element와 text와 주석을 모두 인식하여 가장 앞에 있는것을 반환한다.</li>
+						<li>.<strong>firstElementChild</strong> : 첫번째 element를 반환한다. (IE9부터 지원)</li>
+					</ul>
+					<h4>jQuery</h4>
+					<ul class="txt_list">
+						<li>$('<strong>.class:first</strong>') : 선택자의 첫번째 element를 반환한다.</li>
+						<li>$('<strong>.class:first-child</strong>') : 선택자의 부모를 기준으로 첫번째 element 모두를 반환한다.</li>
+						<li>$('tagName').<strong>first()</strong> : 선택자의 첫번째 element를 반환한다.</li>
+					</ul>
+				</div>
+
+				<h3>last-child</h3>
+				<div class="sum_txt">
+					<h4>javascript</h4>
+					<ul class="txt_list">
+						<li>.<strong>lastChild</strong> : element와 text와 주석을 모두 인식하여 가장 마지막 있는것을 반환한다.</li>
+						<li>.<strong>lastElementChild</strong> : 마지막 element를 반환한다. (IE9부터 지원)</li>
+					</ul>
+					<h4>jQuery</h4>
+					<ul class="txt_list">
+						<li>$('<strong>.class:last</strong>') : 선택자의 가장 마지막 element를 반환한다.</li>
+						<li>$('<strong>.class:last-child</strong>') : 선택자의 부모를 기준으로 마지막 element 모두를 반환한다.</li>
+						<li>$('tagName').<strong>last()</strong> : 선택자의 마지막 element를 반환한다.</li>
+					</ul>
+				</div>
+
+				<h3>previousSibling</h3>
+				<div class="sum_txt">
+					<h4>javascript</h4>
+					<ul class="txt_list">
+						<li>.<strong>previousSibling</strong> : element와 text와 주석을 모두 인식하여 선택자의 형제 요소중 바로 앞에 element를 반환한다.</li>
+						<li>.<strong>previousElementSibling</strong> : 선택자의 형제 요소중 바로 앞에 element를 반환한다. (IE9부터 지원)</li>
+					</ul>
+					<h4>jQuery</h4>
+					<ul class="txt_list">
+						<li>$('.class').<strong>prev()</strong> : 선택자의 형제 요소중 앞에 element를 반환한다.</li>
+						<li>$('.class').<strong>prevAll()</strong> : 선택자의 형제 요소중 앞에 element를 모두 반환한다.</li>
+						<li>$('.class').<strong>prevUntil('selector')</strong> : <b>.class</b>부터 <b>selector</b>사이에 element를 모두 반환한다.</li>
+					</ul>
+				</div>
+
+				<h3>nextSibling</h3>
+				<div class="sum_txt">
+					<h4>javascript</h4>
+					<ul class="txt_list">
+						<li>.<strong>nextSibling</strong> : element와 text와 주석을 모두 인식하여 선택자의 형제 요소중 바로 다음 element를 반환한다.</li>
+						<li>.<strong>nextElementSibling</strong> : 선택자의 형제 요소중 바로 다음 element를 반환한다. (IE9부터 지원)</li>
+					</ul>
+					<h4>jQuery</h4>
+					<ul class="txt_list">
+						<li>$('.class').<strong>next()</strong> : 선택자의 형제 요소중 다음 element를 반환한다.</li>
+						<li>$('.class').<strong>nextAll()</strong> : 선택자의 형제 요소중 다음 element를 모두 반환한다.</li>
+						<li>$('.class').<strong>nextUntil('selector')</strong> : <b>.class</b>부터 <b>selector</b>사이에 element를 모두 반환한다.</li>
+					</ul>
+				</div>
+
+				<h3>javascript <strong>querySelector() / querySelectorAll()</strong></h3>
+				<div class="sum_txt">
+					<ul class="txt_list">
+						<li>javascript도 jquery처럼 괄호안에 css 선택자와 동일하게 넣어 작성할 수 있다.<br> 예) document.querySelector('.class') / document.querySelectorAll('.class')</li>
+						<li><strong>querySelector()</strong> : 괄호안에 명시된 선택자가 여러개라도 그중 가장 앞에 있는 것만 선택된다. (IE8부터 지원)</li>
+						<li><strong>querySelectorAll()</strong> : 괄호안에 명시된 선택자가 모두 선택된다. 다수의 Element가 선택되므로 Index번호를 통해 접근이 가능하다. (IE9부터 지원)</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="content" id="cont02" style="display:none">
+			<div class="content_head">
+				<h2>prototype 정리</h2>
+			</div>
+			<div class="content_body">
+				<p>- 모든 javascript Object(Array, String, Object, Number, Function, RegExp, Date 등)는 prototype을 가지고 있다.</p>
+				<p>- 모든 javascript Object들은 Object.prototype으로 부터 상속받으며 Object.prototype은 prototype chain에서 최상위에 위치한다.</p>
+				<p>- 모든 프로퍼티와 메서드들은 상속받은 부모의 prototype에 따라 정해진 규칙에 의해 사용할 수 있다.</p>
+				<p>- 자신만의 prototype도 생성 할 수 있으며, 수정도 가능하다. 하지만, 표준 prototype은 수정할 수 없다.</p>
+				
+				<h3>Aarry.prototype</h3>
+				<div class="sum_txt">
+					<h4>Arrary.join()</h4>
+					<ul class="txt_list">
+						<li>배열요소를 문자열로 결합하고, 문자열로 반환한다.</li>
+						<li>괄호안에 문자를 기준으로 배열요소를 결합하는데, 기본값은 ',' 이다.</li>
+					</ul>
+					<pre class="code_bx">
+					arr = ['ab','cd','ef','gh'];
+					arr.join(); //"ab,cd,ef,gh";
+					arr.join(''); //"abcdefgh";
+					arr.join('  '); //"ab  cd  ef  gh"; * 공백도 인식해서 결합함. *
+					arr.join('-'); //"ab-cd-ef-gh";
+					</pre>
+
+					<h4>Arrary.reverse()</h4>
+					<ul class="txt_list">
+						<li>배열요소를 순서를 뒤집어서 배열요소를 반환한다.</li>
+					</ul>
+					<pre class="code_bx">
+					arr = ['ab','cd','ef','gh'];
+					arr.reverse(); //['gh','ef','cd','ab'];
+					</pre>
+
+					<h4>Arrary.sort()</h4>
+					<ul class="txt_list">
+						<li>배열요소를 오름차순으로 정렬하여 배열요소를 반환한다.</li>
+						<li>알파벳(대,소문자), 가나다등 문자열 모두 고유의 번호를 가지고 있어 그 숫자에 맞춰 정렬된다.</li>
+						<li>배열에 숫자를 넣어 정렬할 경우 숫자들을 모두 문자열로 인식하여 정렬한다.</li>
+						<li>숫자를 오름차순과 내림차순으로 정확히 정렬하려면 정해진 공식을 넣어주면 된다.</li>
+					</ul>
+					<pre class="code_bx">
+					arr = ["Banana", "Orange", "Apple", "Mango"];
+					arr2 = ["감사", "해요", "사랑", "입니다"];
+					arr3 = [25, 1000, 68278, 70];
+					arr.sort(); // ["Apple", "Banana", "Mango", "Orange"]
+					arr2.sort(); // ["감사", "사랑", "입니다", "해요"]
+					arr3.sort(); // [1000, 25, 68278, 70] * 숫자를 문자로 인식하여 정렬 하므로 25보다 1000이 먼저 정렬된다.
+					arr3.sort(function(a, b){return a-b}) // 오름차순 숫자 정렬 [25, 70, 1000, 68278]
+					arr3.sort(function(a, b){return b-a}) // 내림차순 숫자 정렬 [68278, 1000, 70, 25]
+					</pre>
+
+					<h4>Arrary.concat()</h4>
+					<ul class="txt_list">
+						<li>2개 혹은 그 이상의 배열요소를 결합하여 배열요소로 반환한다.</li>
+						<li>괄호안에 결합할 배열인자들을 1개부터 여러개를 넣어 결합이 가능하며, 인자값 순서대로 배열들이 결합된다.</li>
+					</ul>
+					<pre class="code_bx">
+					arr = ["Banana", "Orange", "Apple", "Mango"];
+					arr2 = ["red", "yellow", "blue", "green"];
+					arr3 = ["Cecilie", "Lone", "Tobias", "Linus"];
+					arr.concat(arr2, arr3); // ["Banana", "Orange", "Apple", "Mango", "red", "yellow", "blue", "green", "Cecilie", "Lone", "Tobias", "Linus"] 
+					</pre>
+
+					<h4>Arrary.slice()</h4>
+					<ul class="txt_list">
+						<li>배열요소를 원하는 요소만 골라내서 새로운 배열요소를 반환한다.</li>
+						<li>배열요소는 0부터 시작하며, -값도 넣을 수 있다.</li>
+						<li>괄호안에 인자값(start, end)을 숫자 2개까지 넣을 수 있으며, start값은 포함하고, end값은 포함하지 않고 반환한다.</li>
+						<li>괄호안에 인자값을 1개만 넣을 경우, 해당 인자값 이후의 모든 배열요소를 반환한다.</li>
+					</ul>
+					<pre class="code_bx">
+					arr = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+					arr.slice(2); // ["Lemon", "Apple", "Mango"]
+					arr.slice(1,4); // ["Orange", "Lemon", "Apple"]
+					arr.slice(-3,-1); // ["Lemon", "Apple"] 
+					</pre>
+
+					<h4>Arrary.splice()</h4>
+					<ul class="txt_list">
+						<li>배열요소를 지우거나, 추가해서 배열의 내용을 변경하고, ****삭제된 요소들의 배열을 반환한다. 아무것도 삭제되지 않았을 경우 빈 배열을 반환한다.</li>
+						<li>괄호안에 인자값(index, howmany, item1, ....., itemX)을 넣어 사용한다.</li>
+						<li>인자값을 item을 넣지 않으면 index에 해당하는 배열 부터 다음값 갯수만큼 삭제된다. </li>
+						<li>인자값을 index만 넣을 경우, index에 해당하는 배열부터 이후 요소들은 모두 삭제된다. </li>
+					</ul>
+					<pre class="code_bx">
+					arr = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+					arr.splice(2, 1, "kiwi", "cherry"); // ["Lemon"] *삭제된 2번인덱스 배열 반환
+					arr // ["Banana", "Orange", "kiwi", "cherry", "Apple", "Mango"] arr배열의 내용이 변경됨.
+					</pre>
+
+					<h4>Arrary.push()</h4>
+					<ul class="txt_list">
+						<li>괄호안에 값을 넣으면 마지막에 배열요소를 추가 하고, 배열길이 값을 반환한다.</li>
+					</ul>
+					<pre class="code_bx">
+					arr = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+					arr.push("kiwi"); // 6 (배열길이 반환)
+					arr // ["Banana", "Orange", "Lemon", "Apple", "Mango", "kiwi"] arr배열의 내용이 변경됨.
+					</pre>
+
+					<h4>Arrary.pop()</h4>
+					<ul class="txt_list">
+						<li>마지막 배열요소를 삭제하고, 삭제된 요소(해당요소가 문자이면 문자열, 숫자이면 숫자열)를 반환한다.</li>
+					</ul>
+					<pre class="code_bx">
+					arr = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+					arr2 = ["Banana", "Orange", "Lemon", "Apple", 555];
+					arr.pop(); // "Mango"
+					arr2.pop(); // 555
+					arr // ["Banana", "Orange", "Lemon", "Apple"] arr배열의 내용이 변경됨.
+					arr2 // ["Banana", "Orange", "Lemon", "Apple"] arr2배열의 내용이 변경됨.
+					</pre>
+
+					<h4>Arrary.shift()</h4>
+					<ul class="txt_list">
+						<li>맨앞에 배열요소를 삭제하고, 삭제된 요소(해당요소가 문자이면 문자열, 숫자이면 숫자열)를 반환한다.</li>
+					</ul>
+					<pre class="code_bx">
+					arr = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+					arr2 = [555, "Orange", "Lemon", "Apple", "Mango"];
+					arr.shift(); // "Banana"
+					arr2.shift(); // 555
+					arr // ["Orange", "Lemon", "Apple", "Mango"] arr배열의 내용이 변경됨.
+					arr2 // ["Orange", "Lemon", "Apple", "Mango"] arr2배열의 내용이 변경됨.
+					</pre>
+
+					<h4>Arrary.unshift()</h4>
+					<ul class="txt_list">
+						<li>괄호안에 값을 넣으면 맨앞에 배열요소를 추가 하고, 배열길이 값을 반환한다.</li>
+					</ul>
+					<pre class="code_bx">
+					arr = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+					arr.unshift("kiwi","pineapple"); // 7 (배열길이 반환)
+					arr // ["kiwi", "pineapple", "Banana", "Orange", "Lemon", "Apple", "Mango"] arr배열의 내용이 변경됨.
+					</pre>
+
+					<h4>Arrary.toString()</h4>
+					<ul class="txt_list">
+						<li>배열요소를 콤마(,)로 구분하여 문자열로 반환한다.</li>
+					</ul>
+					<pre class="code_bx">
+					arr = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+					arr.toString(); // "Banana,Orange,Lemon,Apple,Mango"
+					</pre>
+
+					<h4>Arrary.indexOf()</h4>
+					<ul class="txt_list">
+						<li>인자값에 해당되는 인덱스값을 반환한다.</li>
+						<li>해당되는 값이 없는 경우, -1 반환한다.</li>
+						<li>IE9부터 지원</li>
+					</ul>
+					<pre class="code_bx">
+					arr = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+					arr2 = ["Banana", "Orange", "Apple", "Mango", "Banana", "Orange", "Apple", "Mango"];
+					arr.indexOf("Apple"); // 3
+					arr2.indexOf("Apple", 4); // 6 ** "Apple"라는 문자를 4번째 인덱스 부터 찾음. ( lastIndexOf()를 쓰면 뒤에서 부터 찾을 수 있음)
+					</pre>
+				</div>
+				<hr/>
+				<h3>String.prototype</h3>
+
+					<h4>String.replace()</h4>
+					<ul class="txt_list">
+						<li>2개의 인자값(searchValue, newValue)이 필요하며, searchValue값을 newValue값으로 문자열을 변경할 수 있다.</li>
+						<li>newValue값에 숫자를 넣어도 문자열로 반환된다.</li>
+						<li>정규표현식으로 값을 찾을 수 있다.</li>
+					</ul>
+					<pre class="code_bx">
+					str = "Delicious Bananas";
+					str.replace("Bananas", "Apples"); // "Delicious Apples"
+					</pre>
+
+					<h4>String.slice()</h4>
+					<ul class="txt_list">
+						<li>문자열을 원하는 대로 잘라서 문자열을 반환한다.</li>
+						<li>0부터 시작하며, -값도 넣을 수 있다.</li>
+						<li>괄호안에 인자값(start, end)을 숫자 2개까지 넣을 수 있으며, start값은 포함하고, end값은 포함하지 않고 반환한다.</li>
+						<li>괄호안에 인자값을 1개만 넣을 경우, 해당 인자값 이후의 모든 문자열 반환한다.</li>
+						<li>공백도 포함된다.</li>
+					</ul>
+					<pre class="code_bx">
+					str = "Delicious Bananas";
+					str.slice(3, 15); // "icious Banan"
+					str.slice(-1); // "s"
+					</pre>
+
+					<h4>String.split()</h4>
+					<ul class="txt_list">
+						<li>문자열을 인자값(separator, limit)을 기준으로 배열로 반환한다.</li>
+						<li>기준이 되는 separator값은 삭제된다.</li>
+						<li>limit값만큼 배열길이가 반환된다.</li>
+						<li>공백도 포함된다.</li>
+					</ul>
+					<pre class="code_bx">
+					str = "Delicious Bananas";
+					str.split(); // ["Delicious Bananas"] 인자값이 없는경우 배열로만 반환
+					str.split("i", 2) // ["Del", "c"] 문자열 "i"를 기준으로 배열길이 2만큼만 반환
+					</pre>
+
+					<h4>String.search()</h4>
+					<ul class="txt_list">
+						<li>인자값에 해당하는 인덱스 값을 반환한다.</li>
+						<li>인자값이 없는 경우 -1을 반환한다.</li>
+						<li>문자열과 정규표현식을 사용할 수 있다.</li>
+						<li>공백도 포함된다.</li>
+					</ul>
+					<pre class="code_bx">
+					str = "Delicious Bananas";
+					str.search("Ban"); // 10
+					str.search("apple"); // -1
+					</pre>
+
+					<h4>String.match()</h4>
+					<ul class="txt_list">
+						<li>인자값에는 정규표현식만 넣을 수 있으며, 매칭되는 문자들은 배열로 반환한다.</li>
+					</ul>
+					<pre class="code_bx">
+					str = "The rain in SPAIN stays mainly in the plain"; 
+					str.match(/ain/g); //["ain", "ain", "ain"]
+					str.match(/ain/gi); //["ain", "AIN", "ain", "ain"]
+					</pre>
+
+					<h4>String.trim()</h4>
+					<ul class="txt_list">
+						<li>인자값으로 받은 문자열의 양쪽 여백을 제거하여 반환한다.</li>
+						<li>IE9부터 지원</li>
+					</ul>
+					<pre class="code_bx">
+					str = "    Hello World!    ";
+					str.trim(); // "Hello World!" * 아래 기존 문자열과 비교!
+					str; // "    Hello World!    " ** 문자열은 공백을 모두 포함한다.
+					</pre>
+
+					<h4>String.indexOf()</h4>
+					<ul class="txt_list">
+						<li>인자값에 해당되는 인덱스값을 반환한다.</li>
+						<li>해당되는 값이 없는 경우, -1 반환한다.</li>
+					</ul>
+					<pre class="code_bx">
+					str = "Hello world, welcome to the universe.";
+					str.indexOf("welcome") // 13
+					str.indexOf("e", 5) // 14 ** "e"라는 문자를 5번째 인덱스 부터 찾음. ( lastIndexOf()를 쓰면 뒤에서 부터 찾을 수 있음)
+					</pre>
+				<hr/>	
+				<h3>Object.prototype</h3>
+
+					<h4>Object.hasOwnProperty()</h4>
+					<ul class="txt_list">
+						<li>해당개체가 인자값의 property를 포함하는지 여부를 true, false값으로 반환합니다.</li>
+					</ul>
+					<pre class="code_bx">
+					Number.prototype.hasOwnProperty('toString') // true
+					Array.prototype.hasOwnProperty('slice') // true
+					String.prototype.hasOwnProperty('replace') // true
+					</pre>
+			</div>
+		</div>
+	</div>
+	<div class="footer"></div>
+</div>
+<script src="../js/libs/jquery-1.12.4.min.js"></script>
+<script>
+	
+	
+</script>
+</body>
+</html>
