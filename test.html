@@ -3,20 +3,37 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Test</title>
-	<script src="js/libs/jquery-1.12.4.min.js"></script>
-	<script src="js/libs/jquery-1.12.4.min.js"></script>
-	<script>
-	$(document).ready (function(){
-		$('a').click(function(event){
-			 //alert(event.currentTarget === this); //true
-			 alert(event.target === this); //false
-		})
-	});
-	</script>
 </head>
 <body>
 
-<a href=""><img src="exam8/img/evt_tit.jpg" alt=""></a>
+<a href="">링크</a>
 
+<script src="js/libs/jquery-1.12.4.min.js"></script>
+<script>
+(function ( $ ) {
+ 
+   $.fn.greenify = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+            // These are the defaults.
+            color: "#556b2f",
+            backgroundColor: "red",
+			type: 'slide'
+        }, options );
+ console.log(settings.type)
+        // Greenify the collection based on the settings variable.
+        return this.css({
+            color: settings.color,
+            backgroundColor: settings.backgroundColor
+        });
+	   
+ 		
+    };
+	
+	$('a').greenify();
+ 
+}( jQuery ));
+</script>
 </body>
 </html>

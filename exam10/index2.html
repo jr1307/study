@@ -136,10 +136,12 @@ button::-moz-focus-inner{padding:0;border:0}
 (function (win, $) {
     'use strict';
     // prototype 호출구문
-    win.tabControl = function () {
-        //this.contBox = container;
-        this.init();
-        //console.log(this.obj)
+    win.tabControl = function (options) {
+		var settings = $.extend({
+            type : 'slide'
+        }, options );
+		this.init();
+		this.typeChkFunc(settings.type)
     };
     // prototype 선언구문
     win.tabControl.prototype = {
@@ -164,16 +166,22 @@ button::-moz-focus-inner{padding:0;border:0}
             this.oldIdx = this.curIdx;
             this.contLength = this.castArticle.length;
         },
+		typeChkFunc : function (effect) {
+			if(effect === 'slide'){
+				this.slideType = effect
+			}else if(effect === 'fade'){
+				this.slideType = effect
+			}
+			
+		},		
         bindEvents : function () {
             this.tabList.on('click', $.proxy(this.onClickFunc, this));
             this.btnPrev.on('click', $.proxy(this.onPrevFunc, this));
             this.btnNext.on('click', $.proxy(this.onNextFunc, this));
         },
         onClickFunc : function () {
-            console.log(this.oldIdx)
             this.curIdx = $(event.currentTarget).index();
-            this.nextSlideFunc();
-            this.viewFunc();
+            this.viewFunc('-100%', '100%');
             return false;
         },
         onPrevFunc : function () {
@@ -181,34 +189,33 @@ button::-moz-focus-inner{padding:0;border:0}
                 this.curIdx = this.contLength;
             }
             this.curIdx--;
-            this.slideFunc('100%', '-100%');
-            this.viewFunc();
+            this.viewFunc('100%', '-100%');
         },
         onNextFunc : function () {
             this.curIdx++;
             if(this.curIdx >= this.contLength){
                 this.curIdx = 0;
             }
-            this.slideFunc('-100%', '100%');
-            this.viewFunc();
+            this.viewFunc('-100%', '100%');
         },
-        viewFunc : function () {            
+        viewFunc : function (start, end) {            
             this.tabList.eq(this.oldIdx).removeClass('active');
             this.tabList.eq(this.curIdx).addClass('active');
+			if(this.slideType === 'slide'){
+				this.slideFunc(start, end);
+			}else if(this.slideType === 'fade'){
+				this.fadeFunc();
+			}
             this.oldIdx = this.curIdx;
         },
-        slideFunc : function (a, b) {
-            this.castArticle.eq(this.oldIdx).animate({'left': a}, function () {$(this).removeClass('active');});
-            this.castArticle.eq(this.curIdx).addClass('active').css({'left': b}).stop().animate({'left': 0});
-        }
-//        nextSlideFunc : function () {
-//            this.castArticle.eq(this.oldIdx).animate({'left': '-100%'}, function () {$(this).removeClass('active');});
-//            this.castArticle.eq(this.curIdx).addClass('active').css({'left':'100%'}).stop().animate({'left': 0});
-//        },
-//        prevSlideFunc : function () {
-//            this.castArticle.eq(this.oldIdx).animate({'left': '100%'}, function () {$(this).removeClass('active');});
-//            this.castArticle.eq(this.curIdx).addClass('active').css({'left':'-100%'}).stop().animate({'left': 0});
-//        }
+        slideFunc : function (start, end) {
+            this.castArticle.eq(this.oldIdx).animate({'left': start}, function () {$(this).removeClass('active');});
+            this.castArticle.eq(this.curIdx).addClass('active').css({'left': end}).stop().animate({'left': 0});
+        },
+		fadeFunc : function () {
+			this.castArticle.eq(this.oldIdx).fadeOut(500).removeClass('active');
+            this.castArticle.eq(this.curIdx).fadeIn(500).addClass('active');
+		}
     };
     // 함수호출구문
     var funcObj = new win.tabControl();

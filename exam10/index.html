@@ -135,10 +135,10 @@ button::-moz-focus-inner{padding:0;border:0}
 (function (win, $) {
     'use strict';
     // prototype 호출구문
-    win.tabControl = function (container,container2) {
-        this.contBox = container;
+    win.tabControl = function () {
+        this.contBox = '.cast_box';
         this.init();
-        console.log(container,container2)
+        
     };
     // prototype 선언구문
     win.tabControl.prototype = {
@@ -146,6 +146,7 @@ button::-moz-focus-inner{padding:0;border:0}
             this.setElements();
             this.bindEvents();
             this.initialFunc();
+			console.log(this.contBox)
         },
         setElements : function () {
             this.castBox = $(this.contBox);
@@ -204,7 +205,7 @@ button::-moz-focus-inner{padding:0;border:0}
         }
     };
     // 함수호출구문
-    var funcObj = new win.tabControl('.cast_box');
+    var funcObj = new win.tabControl();
     
 })(window, window.jQuery);
 </script>
