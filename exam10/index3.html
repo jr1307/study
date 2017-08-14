@@ -143,6 +143,7 @@ button::-moz-focus-inner{padding:0;border:0}
     win.tabControl = function (container,args) {
         var defParams = {
             effect : args
+            //speed : 500 //fade speed
         };
         this.opts = $.extend({}, defParams, (args || {}));
         if(!(this.obj = $(container)).length) return;
@@ -214,7 +215,7 @@ button::-moz-focus-inner{padding:0;border:0}
                     this.slideFunc(start, end);
                     break;
                 case 'fade' :
-                    this.fadeFunc();
+                    this.fadeFunc(this.opts.speed);
                     break;
             }
             this.oldIdx = this.curIdx;
@@ -224,9 +225,9 @@ button::-moz-focus-inner{padding:0;border:0}
             this.itemList.eq(this.oldIdx).animate({'left': start}, function () {$(this).removeClass('active');});
             this.itemList.eq(this.curIdx).addClass('active').css({'left': end}).stop().animate({'left': 0});
         },
-		fadeFunc : function () {
-			this.itemList.eq(this.oldIdx).fadeOut(500).removeClass('active');
-            this.itemList.eq(this.curIdx).fadeIn(500).addClass('active');
+		fadeFunc : function (speed) {
+			this.itemList.eq(this.oldIdx).fadeOut(speed).removeClass('active');
+            this.itemList.eq(this.curIdx).fadeIn(speed).addClass('active');
 		}
     };
     // 함수호출구문
