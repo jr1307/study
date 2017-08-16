@@ -3,20 +3,32 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Test</title>
+	<style>
+  div {
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    float: left;
+    border: 2px solid blue;
+  }
+  .blue {
+    background: blue;
+  }
+  </style>
 	<script src="js/libs/jquery-1.12.4.min.js"></script>
-	<script src="js/libs/jquery-1.12.4.min.js"></script>
-	<script>
-	$(document).ready (function(){
-		$('a').click(function(event){
-			 //alert(event.currentTarget === this); //true
-			 alert(event.target === this); //false
-		})
-	});
-	</script>
 </head>
 <body>
-
-<a href=""><img src="exam8/img/evt_tit.jpg" alt=""></a>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+ 
+<script>
+$( "body" ).find( "div" ).eq( 2 ).addClass( "blue" );
+console.log($( "body" ).find( "div" ).eq( 2 ))    
+</script>
 
 </body>
 </html>
