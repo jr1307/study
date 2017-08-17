@@ -3,32 +3,37 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Test</title>
-	<style>
-  div {
-    width: 60px;
-    height: 60px;
-    margin: 10px;
-    float: left;
-    border: 2px solid blue;
-  }
-  .blue {
-    background: blue;
-  }
-  </style>
-	<script src="js/libs/jquery-1.12.4.min.js"></script>
 </head>
 <body>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
- 
-<script>
-$( "body" ).find( "div" ).eq( 2 ).addClass( "blue" );
-console.log($( "body" ).find( "div" ).eq( 2 ))    
-</script>
 
+<a href="">링크</a>
+
+<script src="js/libs/jquery-1.12.4.min.js"></script>
+<script>
+(function ( $ ) {
+ 
+   $.fn.greenify = function( options ) {
+ 
+        // This is the easiest way to have default options.
+        var settings = $.extend({
+            // These are the defaults.
+            color: "#556b2f",
+            backgroundColor: "red",
+			type: 'slide'
+        }, options );
+ console.log(settings.type)
+        // Greenify the collection based on the settings variable.
+        return this.css({
+            color: settings.color,
+            backgroundColor: settings.backgroundColor
+        });
+	   
+ 		
+    };
+	
+	$('a').greenify();
+ 
+}( jQuery ));
+</script>
 </body>
 </html>

@@ -137,7 +137,8 @@ button::-moz-focus-inner{padding:0;border:0}
     // prototype 호출구문
     win.tabControl = function (options) {
 		var settings = $.extend({
-            type : 'fade' //slide타입, fade타입
+            type : 'slide'
+            //type : 'fade' //slide타입, fade타입
         }, options );
 		this.init();
 		this.typeChkFunc(settings.type)
