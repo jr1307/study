@@ -42,22 +42,22 @@ th,td{height:50px;text-align:center}
         </thead>
         <tbody>
         <tr>
-        <td>1</td>
+        <td class="a">1</td>
         <td>ccccc</td>
         <td>하이브랩</td>
         </tr>
         <tr>
-        <td>2</td>
+        <td class="b">3</td>
         <td>zzzzz</td>
         <td>사내교육</td>
         </tr>
         <tr>
-        <td>3</td>
+        <td class="c">2</td>
         <td>aaaa</td>
         <td>개발1팀</td>
         </tr>
         <tr>
-        <td>4</td>
+        <td class="d">4</td>
         <td>ffff</td>
         <td>김민재</td>
         </tr>
@@ -84,34 +84,50 @@ th,td{height:50px;text-align:center}
             this.table = $('table');
             this.tHead = this.table.find('thead');
             this.tBody = this.table.find('tbody');
-            this.Btr = this.tBody.find('tr');
-            this.Btd = this.Btr.find('td');
             this.btnSort = this.tHead.find('.btn_sort');
         },
         bindEvents : function () {
             this.btnSort.on('click', $.proxy(this.onClickFunc, this));
         },
-        arrFunc : function () {
-            this.arr = [];
-            for(var i = 0; i < this.Btr.length; i++){
-                this.arr.push(this.Btr.eq(i).find('td').eq(this.idx).text())
-                console.log(this.arr)
-            }
-            this.arr.sort();
-        },
-        sortSet : function () {
-            for(var j = 0; j < this.Btr.length; j++){
-                this.Btr.eq(j).find('td').eq(this.idx).text(this.arr[j])
-            }
-        },
         onClickFunc : function (e) {
-            this.idx = $(e.currentTarget).parent().index();
-            this.arr = [4,1,0,2];
-            for(var i = 0 ; i < this.Btr.length; i++){
-                
-            }
-            console.log(this.Btr.eq(0))
-            
+			
+			var idx = $(e.currentTarget).parent().index(),
+				arr = [],
+				basicArr = [],
+				resultArr = [];
+			console.log(idx)
+			this.tBody.children().filter(function(){
+				switch(idx){
+					case 0 :
+						var txt = parseInt($(this).find('td').eq(idx).text());
+						break;
+					
+					case 1 : 
+						var txt = $.trim($(this).find('td').eq(idx).text());
+						break;
+						
+					case 2 : 
+						var txt = $.trim($(this).find('td').eq(idx).text());
+						break;
+				}
+				arr.push(txt);
+				basicArr.push(txt);
+			});
+			arr.sort();
+			this.sortArr = arr;
+			this.basicArr = basicArr;
+			var tr = this.tBody.children();
+			
+			for(var i = 0; i < this.sortArr.length; i++){
+				for(var j = 0; j < this.basicArr.length; j++){
+					if(this.sortArr[i] == this.basicArr[j]){
+						resultArr.push(j);
+					}
+				}
+			}
+			for(var k = 0; k < resultArr.length; k++){
+				this.tBody.children().last().after(tr.eq(resultArr[k]))
+			}
         }
     }
     listSorting.init();
