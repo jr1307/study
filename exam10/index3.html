@@ -93,7 +93,36 @@ button::-moz-focus-inner{padding:0;border:0}
             </div>
         </div>
 
-        <div class="slide_box">
+        <div class="slide_box slide_box1">
+            <div class="slide_tab">
+                <ul>
+                    <li class="active"><a href="#slide1">테마1</a></li>
+                    <li><a href="#slide2">테마2</a></li>
+                    <li><a href="#slide3">테마3</a></li>
+                    <li><a href="#slide4">테마4</a></li>
+                    <li><a href="#slide5">테마5</a></li>
+                    <li><a href="#slide6">테마6</a></li>
+                    <li><a href="#slide7">테마7</a></li>
+                    <li><a href="#slide8">테마8</a></li>
+                </ul>
+            </div>
+            <div class="slide_cont">
+                <div id="slide1" class="slide_article active">컨텐츠1</div>
+                <div id="slide2" class="slide_article">컨텐츠2</div>
+                <div id="slide3" class="slide_article">컨텐츠3</div>
+                <div id="slide4" class="slide_article">컨텐츠4</div>
+                <div id="slide5" class="slide_article">컨텐츠5</div>
+                <div id="slide6" class="slide_article">컨텐츠6</div>
+                <div id="slide7" class="slide_article">컨텐츠7</div>
+                <div id="slide8" class="slide_article">컨텐츠8</div>
+            </div>
+            <div class="slide_setting">
+                <div class="slide_btn">
+                    <button type="button" class="btn_prev">이전</button><button type="button" class="btn_next">다음</button>
+                </div>
+            </div>
+        </div>
+        <div class="slide_box slide_box2">
             <div class="slide_tab">
                 <ul>
                     <li class="active"><a href="#slide1">테마1</a></li>
@@ -141,14 +170,11 @@ button::-moz-focus-inner{padding:0;border:0}
     var UTIL = win.stProject.common.util;
     // prototype 호출구문
     win.tabControl = function (container,args) {
-        var defParams = {
-            effect : args
-            //speed : 500 //fade speed
-        };
-        this.opts = $.extend({}, defParams, (args || {}));
+        this.opts = $.extend({}, (args || {}));
         if(!(this.obj = $(container)).length) return;
         this.init();
     };
+    
     // prototype 선언구문
     win.tabControl.prototype = {
         init : function () {
@@ -231,8 +257,29 @@ button::-moz-focus-inner{padding:0;border:0}
 		}
     };
     // 함수호출구문
-    var funcObj = new win.tabControl('.cast_box', {effect : 'tab'}); 
-    var funcObj = new win.tabControl('.slide_box', {effect : 'slide'}); // 효과 tab, slide, fade
+    //var funcObj = new win.tabControl('.cast_box', {effect : 'tab'}); 
+    //var funcObj = new win.tabControl('.slide_box', {effect : 'slide'}); // 효과 tab, slide, fade
+     $.fn.slidePlugin = function (args) {
+        var lengthReturns = [];
+        for (var i = 0, max = $(this).length; i < max; i++) {
+            var _this = $(this).eq(i);
+            lengthReturns.push(new win.tabControl(_this, args));
+        }
+        console.log(_this, args)
+        return lengthReturns;
+    };
+    $(function () {
+        $('.slide_box1').slidePlugin({
+            effect : 'slide'
+        });
+        $('.slide_box2').slidePlugin({
+            effect : 'fade',
+            speed : 500
+        });
+         $('.cast_box').slidePlugin({
+            effect : 'tab'
+        });
+    });
     
 })(window, window.jQuery);
 </script>
