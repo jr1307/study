@@ -725,10 +725,11 @@ ins{text-decoration:none}
     
     win.exam.sticky = function (args) {
         var defParams = {
-            
+            container : '.filter_sort_wrap',
+            fixClass : 'sticky'
         }
-        //this.opts = $.expand(defParams, (args || {}));
-        //if(!(this.obj = $(this.opts.container)).length) return;
+        this.opts = $.extend(defParams, (args || {}));
+        if (!(this.obj = $(this.opts.container)).length) return;
         this.init();
     },
     win.exam.sticky.prototype = {
@@ -737,14 +738,10 @@ ins{text-decoration:none}
             this.bindEvents();
             this.setHeight();
             this.checkItemFunc();
-            this.topScrollFunc();
         },
         setElements : function () {
-            this.stickyMenu = $('.filter_sort_wrap');
+            this.stickyMenu = $(this.opts.container);
             this.stickyMenuWrap = this.stickyMenu.wrap('<div class="sticky_menu_wrap"></div>').parent();
-            this.header = $('#header');
-            this.footer = $('#footer');
-            this.btnTop = $('.btn_top');
         },
         setHeight : function () {
             this.wrapperH = this.stickyMenuWrap.outerHeight();
@@ -752,22 +749,50 @@ ins{text-decoration:none}
         },
         bindEvents : function () {
             $(win).on('scroll', $.proxy(this.scrollFunc, this));
-            $(win).on('scroll', $.proxy(this.topScrollFunc, this));
         },
         checkItemFunc : function () {
             this.stickyTop = this.stickyMenu.offset().top;
+        },
+        scrollFunc : function () {
+           if($(win).scrollTop() >= this.stickyTop){
+                this.stickyMenu.addClass(this.opts.fixClass);
+            }else if($(win).scrollTop() < this.stickyTop){
+                this.stickyMenu.removeClass(this.opts.fixClass);
+            }
+        }
+    }
+    
+    win.exam.btnTop = function (args) {
+        var defParams = {
+            container : '.btn_top',
+            headerBox : '#header',
+            footerBox : '#footer'
+        }
+        this.opts = $.extend(defParams, (args || {}));
+        if (!(this.obj = $(this.opts.container)).length) return;
+        this.init();
+    },
+    win.exam.btnTop.prototype = {
+        init : function () {
+            this.setElements();
+            this.bindEvents();
+            this.checkItemFunc();
+            this.scrollFunc();
+        },
+        setElements : function () {
+            this.btnTop = $(this.opts.container);
+            this.header = $(this.opts.headerBox);
+            this.footer = $(this.opts.footerBox);
+        },
+        bindEvents : function () {
+            $(win).on('scroll', $.proxy(this.scrollFunc, this));
+        },
+        checkItemFunc : function () {
             this.headerH = this.header.outerHeight();
             this.footerH = this.footer.outerHeight();
         },
         scrollFunc : function () {
-           if($(win).scrollTop() >= this.stickyTop){
-                this.stickyMenu.addClass('sticky');
-            }else if($(win).scrollTop() < this.stickyTop){
-                this.stickyMenu.removeClass('sticky');
-            }
-        },
-        topScrollFunc : function () {
-            this.scrollF = $(document).height() - $(win).height() - this.footerH;
+           this.scrollF = $(document).height() - $(win).height() - this.footerH;
             //console.log(this.scrollF, $(win).scrollTop())
             if($(win).scrollTop() < this.headerH){
                 this.btnTop.hide();
@@ -780,6 +805,7 @@ ins{text-decoration:none}
     }
     $(function () {
         var commonSticky = new win.exam.sticky();
+        var btnTop = new win.exam.btnTop();
     });
     
 })(window, window.jQuery);
