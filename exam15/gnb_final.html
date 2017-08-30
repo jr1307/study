@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi">
+<title>gnb</title>
+<link rel="stylesheet" type="text/css" href="css/common.css">
+</head>
+<body>
+<!-- wrapper [s] -->
+<div id="wrap">
+    <div id="header">
+        <h1 class="logo"><a href="#">로고</a></h1>
+        <div class="gnb_open"><button type="button" id="btn_gnbopen">열기</button></div>
+        <div id="gnb">
+            <div class="gnb_wrap">
+                <ul class="menu">
+                <li>
+                    <a href="#" class="btn">‘모노라움’ 학원 소개</a>
+                    <div class="box">
+                        <ul>
+                        <li><a href="#">설립배경</a></li>
+                        <li><a href="#">가치제안</a></li>
+                        <li><a href="#">교육철학 및 경영방침</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="btn">수강안내</a>
+                    <div class="box">
+                        <ul>
+                        <li><a href="#">접수중인 교육과정</a></li>
+                        <li><a href="#">강사소개</a></li>
+                        <li><a href="#">강사 포트폴리오</a></li>
+                        <li><a href="#">연간 교육일정</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="btn">수강문의</a>
+                    <div class="box">
+                        <ul>
+                        <li><a href="#">수강문의</a></li>
+                        <li><a href="#">방문 상담 신청</a></li>
+                        <li><a href="#">모집 알림 신청</a></li>
+                        <li><a href="#">질문 게시판</a></li>
+                        <li><a href="#">이벤트 게시판</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="btn">수강신청</a>
+                    <div class="box">
+                        <ul>
+                        <li><a href="#">수강신청</a></li>
+                        </ul>
+                    </div>
+                </li>
+                </ul>
+                <div class="gnb_close"><button type="button" id="btn_gnbclose">닫기</button></div>
+            </div>
+        </div>
+    </div>
+    <div id="container">
+        <div><a href="#">컨텐츠 들어오는 곳</a></div>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+    </div>
+</div>
+<!-- wrapper [e] -->
+<script src="../js/libs/jquery-1.12.4.min.js"></script>
+<script src="../js/libs/jquery.ba-outside-events.min.js"></script>
+<script src="../js/apps/common.js"></script>
+<script>
+(function (win, $) {
+    'use strict';
+    win.stProject = win.stProject || {};
+    win.stProject.common = win.stProject.common || {};
+
+    var UTIL = win.stProject.common.util;
+
+    win.stProject.gnb = function (container, args) {
+        var defParams = {
+            obj : container,
+            listParent : '.menu',
+            listContent : '.box',
+            breakPoint : 768,
+            openBtn : '#btn_gnbopen',
+            closeBtn : '#btn_gnbclose',
+            moMenu : '#gnb'
+        };
+        this.opts = $.extend({}, defParams, (args || {}));
+        if (!(this.obj = $(this.opts.obj)).length) return;
+        this.init();
+    };
+    win.stProject.gnb.prototype = {
+        init : function () {
+            this.setElements();
+            if (UTIL.isSupportTransform) {
+                this.initLayout();
+                this.resizeEvent();
+                this.setEvents();
+            } else {
+                this.setPcEvent(true);
+            }
+        },
+        setElements : function () {
+            this.listParent = this.obj.find(this.opts.listParent);
+            this.listChild = this.listParent.children();
+            this.listContent = this.obj.find(this.opts.listContent);
+            this.openBtn = this.obj.find(this.opts.openBtn);
+            this.closeBtn = this.obj.find(this.opts.closeBtn);
+            this.moMenu = this.obj.find(this.opts.moMenu);
+        },
+        initLayout : function () {
+            this.setType = (UTIL.winSize().w > this.opts.breakPoint) ? 'pc' : 'mo';
+        },
+        resizeEvent : function () {
+            $(win).on('resize', $.proxy(this.setEvents, this));
+        },
+        setEvents : function () {
+            if (UTIL.winSize().w > this.opts.breakPoint) {
+                if (this.setType === 'pc') {
+                    this.setType = 'mo';
+                    this.setPcLayout();
+                    this.setPcEvent(true);
+                    this.setMoEvent(false);
+                }
+            } else {
+                if (this.setType === 'mo') {
+                    this.setType = 'pc';
+                    this.setMoLayout();
+                    this.setMoEvent(true);
+                    this.setPcEvent(false);
+                }
+            }
+        },
+        setPcEvent : function (type) {
+            if (type) {
+                this.listChild.on('mouseenter mouseleave focusin', $.proxy(this.setPcHover, this));
+            } else {
+                this.listChild.off('mouseenter mouseleave focusin');
+            }
+        },
+        setMoEvent : function (type) {
+            if (type) {
+                this.openBtn.on('click', $.proxy(this.onOpenFunc, this));
+                this.closeBtn.on('click', $.proxy(this.onCloseFunc, this));
+            } else {
+                this.openBtn.off('click');
+                this.closeBtn.off('click');
+            }
+        },
+        setPcHover : function (e) {
+            var target = $(e.currentTarget);
+            if (e.type === 'mouseenter' || e.type === 'focusin') {
+                target.find(this.opts.listContent).show();
+            } else if (e.type === 'mouseleave') {
+                target.find(this.opts.listContent).hide();
+            }
+        },
+        onOpenFunc : function () {
+            this.moMenu.css('left', '0');
+        },
+        onCloseFunc : function () {
+            this.moMenu.css('left', '');
+        },
+        setPcLayout : function () {
+            this.listContent.hide();
+        },
+        setMoLayout : function () {
+            this.listContent.show();
+        }
+    }
+
+    $(function () {
+        win.homeNavigation = new win.stProject.gnb('#header');
+    });
+})(window, window.jQuery);
+</script>
+</body>
+</html>
