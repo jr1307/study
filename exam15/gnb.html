@@ -124,8 +124,6 @@
     win.projectName.gnb.prototype = {
         init : function (){
             this.setElements();
-            this.initialFunc();
-            this.resizeEvent();
         },
         setElements : function () {
             this.header = this.obj;
@@ -141,6 +139,7 @@
                 //css transform 지원되는 브라우저체크 
                 this.initialFunc();
                 this.resizeEvent();
+                this.onResizeEvent();
             } else {
                 //css transform 지원안되는 브라우저체크 ie8이하
                 this.setPcEvent();
@@ -148,7 +147,6 @@
         },
         initialFunc : function () {
             this.setType = (UTIL.winSize().w > this.opts.breakPoint) ? 'pc' : 'mo';
-            
         },
         resizeEvent : function () {
             $(win).on('resize', $.proxy(this.onResizeEvent, this));
@@ -159,6 +157,7 @@
                     this.setType = "pc";
                     this.setMoEvent(true);
                     this.setPcEvent(false);
+                    console.log(this.setType)
                 }
                 
             }else{
@@ -166,11 +165,13 @@
                     this.setType = "mo"; 
                     this.setPcEvent(true);
                     this.setMoEvent(false);
+                    this.layerOutside();
+                    console.log(this.setType)
                 }
             }
         },
         setPcEvent : function (type) {
-            if(type === "true"){
+            if(type){
                 this.gnbMenuList.on('mouseenter mouseleave focusin', $.proxy(this.onHoverEvent, this));
             }else{
                 this.gnbMenuList.off('mouseenter mouseleave focusin', $.proxy(this.onHoverEvent, this));
@@ -186,7 +187,7 @@
             }
         },
         setMoEvent : function (type) {
-            if(type === "true"){
+            if(type){
                 this.gnbOpenBtn.on('click', $.proxy(this.onOpenEvent, this));
                 this.gnbCloseBtn.on('click', $.proxy(this.layerOutside, this));
             }else{
