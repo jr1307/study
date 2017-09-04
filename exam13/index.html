@@ -793,6 +793,7 @@ ins{text-decoration:none}
         },
         scrollFunc : function () {
            this.scrollF = $(document).height() - $(win).height() - this.footerH;
+            console.log($(document).height(), $(win).height())
             //console.log(this.scrollF, $(win).scrollTop())
             if($(win).scrollTop() < this.headerH){
                 this.btnTop.hide();
