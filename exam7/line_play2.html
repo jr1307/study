@@ -23,32 +23,28 @@
 				this.btnRandom = this.playWrap.find('button')
 			},
 			initialFunc : function(){
-				this.arrFunc();
-				this.getRandomFunc();
-				this.swiperSlide.eq(this.idx).show();
-				//console.log(this.swiperSlide.length)
+                this.oldIdx = 0;
+                this.arrFunc(); // li를 배열에 담는 함수
+                this.randomFunc();
+                this.swiperSlide.eq(this.curIdx).show();
 			},
-			getRandomFunc : function(){
-				this.randomN = Math.floor(Math.random()*this.swiperSlide.length);
-				this.idx = this.randomN;
-			},
-			bindEvents : function(){
-				this.btnRandom.on('click', $.proxy(this.onClickFunc, this));
-			},
-			onClickFunc : function(){
-				this.getRandomFunc();
-				this.swiperSlide.eq(this.oldIdx).hide();
-				this.swiperSlide.eq(this.idx).show();
-				this.oldIdx = this.Idx;
-//				console.log(this.arr);
-//				this.arr.splice()
-			},
-			arrFunc : function(){
-				this.arr = [];
-				for(i=0;i<this.swiperSlide.length; i++){
-					this.arr.push(i);
-				}
-			}
+            randomFunc : function(){
+                this.randomN = Math.floor(Math.random()*this.arr.length); //this.arr.length = 4   
+                this.curIdx = this.arr[this.randomN];
+                this.oldIdx = this.curIdx;
+            },
+            arrFunc : function(){
+                this.arr = [];
+                for(var i = 0, max = this.swiperSlide.length; i < max; i++){
+                    this.arr.push(i);
+                }
+            },
+            bindEvents : function(){
+                this.btnRandom.on('click', $.proxy(this.onClickFunc, this));
+            },
+            onClickFunc : function(){
+                
+            }
 		}
 		exam.init();
 	});
@@ -82,6 +78,7 @@
                 <img src="img/avatar_02.jpg" alt="avatar image" class="img_avatar">
             </span>
         </li>
+<!--
         <li class="swiper-slide">
             <span class="avatar_box">
                 <img src="img/avatar_03.jpg" alt="avatar image" class="img_avatar">
@@ -92,6 +89,7 @@
                 <img src="img/avatar_04.jpg" alt="avatar image" class="img_avatar">
             </span>
         </li>
+-->
         </ul>
     </div>
     <button type="button" class="btn_random"><span>다른 아바타 보기</span></button>

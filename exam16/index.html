@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi">
+<title>List Expand</title>
+<style>
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,table,th,td,form,fieldset,legend,textarea,input,select,textarea,button{margin:0;padding:0}
+html,body{height:100%}
+body{}
+h1,h2,h3,h4,h5,h6{font-weight:normal}
+fieldset,li,img{border:0;vertical-align:top}
+ul,ol{list-style:none}
+button{overflow:visible;border:0;background-color:transparent;cursor:pointer}
+button::-moz-focus-inner{padding:0;border:0}
+address,caption,em{font-style:normal}
+a,a:focus,a:active,a:hover{text-decoration:none;color:#333}
+table{border-collapse:collapse;border-spacing:0}
+hr{display:none}
+.blind,legend{overflow:hidden;position:absolute;top:0;left:0;width:1px;height:1px;font-size:1px;line-height:100px;white-space:nowrap}
+.s-toggle-layer{width:300px}
+.s-toggle-list a{display:block;position:relative;padding:15px;background:#000;color:#fff;text-decoration: none}
+.s-toggle-content{padding:15px;background:#f1f1f1;}
+.s-ico-toggle{position:absolute;top:50%;right:15px;width:10px;height:10px;margin-top:-5px;}
+.s-ico-toggle:before{position:absolute;top:50%;left:0;width:10px;height:2px;background:#fff;margin-top:-1px;content:'';}
+.s-ico-toggle:after{position:absolute;top:0;left:50%;width:2px;height:10px;background:#fff;margin-left:-1px;content:'';}
+.s-toggle-list.active .s-ico-toggle:after{display:none;}
+</style>
+</head>
+<body>
+<!-- wrapper [s] -->
+<div id="wrap">
+    <div class="s-toggle-layer">
+        <ul>
+        <!-- [D] active 시 .active 추가, aria-expanded="true"로 변경 -->
+        <li class="s-toggle-list" aria-expanded="true">
+            <a href="#list1" class="s-toggler-title">
+                <em>title</em>
+                <span class="s-ico-toggle">
+                    <span class="blind" data-global-text='{
+                        "Expand" : "열림",
+                        "Collapse" : "닫힘"
+                    }'>열림</span>
+                </span>
+            </a>
+            <div class="s-toggle-content" id="list1">
+                @content
+            </div>
+        </li>
+        <li class="s-toggle-list" aria-expanded="false">
+            <a href="#list2" class="s-toggler-title">
+                <em>title</em>
+                <span class="s-ico-toggle">
+                    <span class="blind" data-global-text='{
+                        "Expand" : "열림",
+                        "Collapse" : "닫힘"
+                    }'>열림</span>
+                </span>
+            </a>
+            <div class="s-toggle-content" id="list2">
+                @content
+            </div>
+        </li>
+        <li class="s-toggle-list" aria-expanded="false">
+            <a href="#list3" class="s-toggler-title">
+                <em>title</em>
+                <span class="s-ico-toggle">
+                    <span class="blind" data-global-text='{
+                        "Expand" : "열림",
+                        "Collapse" : "닫힘"
+                    }'>열림</span>
+                </span>
+            </a>
+            <div class="s-toggle-content" id="list3">
+                @content
+            </div>
+        </li>
+        </ul>
+    </div>
+</div>
+<!-- wrapper [e] -->
+<script src="../js/libs/jquery-1.12.4.min.js"></script>
+<script src="../js/apps/common.js"></script>
+<script>
+(function (win, $) {
+    'use strict';
+    win.stProject = win.stProject || {};
+    win.stProject.common = win.stProject.common || {};
+
+    var UTIL = win.stProject.common.util;
+
+    win.stProject.listExpand = function (container, args) {
+        var defParams = {
+            obj : container,
+            listParent : 'ul',
+            listToggler : '.s-toggler-title',
+            listContent : '.s-toggle-content',
+            activeClass : 'active',
+            accessAria : 'aria-expanded',
+            accessText : '.blind',
+            accessData : 'accessbility-Active'
+        };
+        this.opts = $.extend({}, defParams, (args || {}));
+        if (!(this.obj = $(this.opts.obj)).length) return;
+        this.init();
+    };
+    win.stProject.listExpand.prototype = {
+        init : function () {
+            this.setElements();
+            this.initLayout();
+            this.bindEvents();
+        },
+        setElements : function () {
+            this.listParent = this.obj.find(this.opts.listParent);
+            this.listChild = this.listParent.children();
+            this.listToggler = this.listChild.find(this.opts.listToggler);
+            this.listContent = this.listChild.find(this.opts.listContent);
+            this.accessText = this.listChild.find(this.opts.accessText);
+        },
+        initLayout : function () {
+            this.listContent.hide();
+            this.initData();
+            this.listChild.removeClass(this.opts.activeClass).attr(this.opts.accessAria, false);
+            this.listChild.data(this.opts.accessData, false);
+        },
+        initData : function () {
+            var targetText = this.accessText.data('global-text');
+            this.targetData = {
+                Collapse : $.trim(targetText.Collapse),
+                Expand : $.trim(targetText.Expand)
+            }
+        },
+        bindEvents : function () {
+            this.listToggler.on('click', $.proxy(this.toggleFunc, this));
+            $(win).on('load', $.proxy(this.initLoading, this));
+        },
+        toggleFunc : function (e) {
+            var target = $(e.currentTarget);
+            this.currentIndex = target.closest('li').index();
+            this.viewFunc();
+            this.accessFunc();
+        },
+        viewFunc : function () {
+            this.listContent.eq(this.currentIndex).stop().slideToggle();
+            this.listChild.eq(this.currentIndex).toggleClass(this.opts.activeClass);
+
+            if (this.currentIndex === this.oldIndex) return;
+            this.listContent.eq(this.oldIndex).stop().slideUp();
+            this.listChild.eq(this.oldIndex).removeClass(this.opts.activeClass);
+        },
+        accessFunc : function () {
+            var currentType = !this.listChild.eq(this.currentIndex).data(this.opts.accessData),
+                globalText = (currentType) ? this.targetData.Collapse : this.targetData.Expand;
+            this.listChild.eq(this.currentIndex).attr(this.opts.accessAria, currentType);
+            this.listChild.eq(this.currentIndex).data(this.opts.accessData, currentType);
+            this.accessText.eq(this.currentIndex).text(globalText);
+
+            if (this.currentIndex === this.oldIndex) return;
+            this.listChild.eq(this.oldIndex).attr(this.opts.accessAria, false);
+            this.listChild.eq(this.oldIndex).data(this.opts.accessData, false);
+            this.accessText.eq(this.oldIndex).text(this.targetData.Expand);
+            this.oldIndex = this.currentIndex;
+        },
+        initLoading : function () {
+            var initHash = (document.location.href).split('#')[1];
+            if('undefined' === typeof initHash) return;
+            var initViewId = '#' + initHash;
+            $(initViewId).closest('li').find('>a').triggerHandler('click');
+        }
+    }
+
+    $(function () {
+        win.listExpand = new win.stProject.listExpand('.s-toggle-layer');
+    });
+})(window, window.jQuery);
+</script>
+</body>
+</html>
