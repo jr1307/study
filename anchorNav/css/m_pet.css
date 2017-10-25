@@ -1,0 +1,49 @@
+@charset "utf-8";
+
+#pm_wrap{max-width:640px;margin:0 auto;overflow:hidden}
+.evt{position:relative}
+.evt img,.m_img{width:100%;border:0}
+#pm_wrap .nav_wrap{position:relative;z-index:310}
+#pm_wrap .nav_wrap.fixed .nav{position:fixed;top:0;left:0;width:100%;z-index:310}
+#pm_wrap .nav{position:absolute;left:0;top:0;width:100%}
+#pm_wrap .nav a{position:absolute;left:0;top:0;width:16.1%;height:100%;text-indent:-9999px;background:url(http://image.gmarket.co.kr/Gmkt_Event/2017/07/0719_pet/m/tab01_off.jpg) no-repeat 0 0;background-size:100% 100%}
+#pm_wrap .nav a.on{background-image:url(http://image.gmarket.co.kr/Gmkt_Event/2017/07/0719_pet/m/tab01_on.jpg)}
+#pm_wrap .nav .btn_anchor2{left:17.1%;background:url(http://image.gmarket.co.kr/Gmkt_Event/2017/07/0719_pet/m/tab02_off.jpg) no-repeat 0 0;background-size:100% 100%}
+#pm_wrap .nav .btn_anchor2.on{background-image:url(http://image.gmarket.co.kr/Gmkt_Event/2017/07/0719_pet/m/tab02_on.jpg)}
+#pm_wrap .nav .btn_anchor3{left:34.1%;background:url(http://image.gmarket.co.kr/Gmkt_Event/2017/07/0719_pet/m/tab03_off.jpg) no-repeat 0 0;background-size:100% 100%}
+#pm_wrap .nav .btn_anchor3.on{background-image:url(http://image.gmarket.co.kr/Gmkt_Event/2017/07/0719_pet/m/tab03_on.jpg)}
+#pm_wrap .nav .btn_anchor4{left:50.1%;background:url(http://image.gmarket.co.kr/Gmkt_Event/2017/07/0719_pet/m/tab04_off.jpg) no-repeat 0 0;background-size:100% 100%}
+#pm_wrap .nav .btn_anchor4.on{background-image:url(http://image.gmarket.co.kr/Gmkt_Event/2017/07/0719_pet/m/tab04_on.jpg)}
+#pm_wrap .nav .btn_anchor5{left:67.1%;background:url(http://image.gmarket.co.kr/Gmkt_Event/2017/07/0719_pet/m/tab05_off.jpg) no-repeat 0 0;background-size:100% 100%}
+#pm_wrap .nav .btn_anchor5.on{background-image:url(http://image.gmarket.co.kr/Gmkt_Event/2017/07/0719_pet/m/tab05_on.jpg)}
+#pm_wrap .nav .btn_anchor6{left:83.1%;background:url(http://image.gmarket.co.kr/Gmkt_Event/2017/07/0719_pet/m/tab06_off.jpg) no-repeat 0 0;background-size:100% 100%}
+#pm_wrap .nav .btn_anchor6.on{background-image:url(http://image.gmarket.co.kr/Gmkt_Event/2017/07/0719_pet/m/tab06_on.jpg)}
+.sec1{position:relative}
+.sec1 a{position:absolute;width:50%;height:8%;text-indent:-9999px}
+.sec1 .btn_coupon{left:25%;top:44%}
+.sec1 .btn_coupon.coupon2{top:80%}
+.sec1 .btn_notice{top:90%;left:32%;width:36%;height:7%}
+.sec4_img4{position:relative}
+.sec4_img4 a{position:absolute;left:0;top:0;width:50%;height:100%;text-indent:-9999px}
+.sec4_img4 a + a{left:50%}
+.sec6 ul{overflow:hidden}
+.sec6 ul li{float:left;width:50%;}
+.sec6 ul li:first-child{width:100%}
+.sec7 ul{overflow:hidden}
+.sec7 ul li{float:left;width:50%;}
+.sec8{position:relative}
+.sec8 a{position:absolute; left: 8%;top: 31%;width: 27%;height: 13%;text-indent:-9999px}
+.sec8 .btn_shop2{left:36%}
+.sec8 .btn_shop3{left:65%}
+.sec8 .btn_shop4{top:45%}
+.sec8 .btn_shop5{left:36%;top:45%}
+.sec8 .btn_shop6{left:65%;top:45%}
+.sec8 .btn_shop7{top:59%}
+.sec8 .btn_shop8{left:36%;top:59%}
+.sec8 .btn_shop9{left:65%;top:59%}
+.sec8 .btn_shop10{top:73%}
+.sec8 .btn_shop11{left:36%;top:73%}
+.sec8 .btn_shop12{left:65%;top:73%}
+.lypop{position:absolute;left:0;top:96%;width:100%}
+.lypop .btn_close{position:absolute;left:0;top:0;width:100%;height:100%;text-indent:-9999px}
+.day1{display:none !important;}
